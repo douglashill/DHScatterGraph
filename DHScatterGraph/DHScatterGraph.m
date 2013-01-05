@@ -59,8 +59,8 @@
 	
 	[self setPadding:CGSizeMake(5.0, 5.0)];
 	
-	[self setPositiveSumQuadrantColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.94, 1.0)]];
-	[self setNegativeSumQuadrantColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.91, 1.0)]];
+	[self setPositiveQuadrantColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.94, 1.0)]];
+	[self setNegativeQuadrantColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.91, 1.0)]];
 	
 	[self setLineWidth:2.0];
 	[self setLineColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.4, 1.0)]];
@@ -124,15 +124,15 @@
 	[self DH_SET_NEEDS_DISPLAY_METHOD];
 }
 
-- (void)setPositiveSumQuadrantColour:(DH_COLOUR_CLASS *)positiveSumQuadrantColour
+- (void)setPositiveQuadrantColour:(DH_COLOUR_CLASS *)positiveQuadrantColour
 {
-	_positiveSumQuadrantColour = positiveSumQuadrantColour;
+	_positiveQuadrantColour = positiveQuadrantColour;
 	[self DH_SET_NEEDS_DISPLAY_METHOD];
 }
 
-- (void)setNegativeSumQuadrantColour:(DH_COLOUR_CLASS *)negativeSumQuadrantColour
+- (void)setNegativeQuadrantColour:(DH_COLOUR_CLASS *)negativeQuadrantColour
 {
-	_negativeSumQuadrantColour = negativeSumQuadrantColour;
+	_negativeQuadrantColour = negativeQuadrantColour;
 	[self DH_SET_NEEDS_DISPLAY_METHOD];
 }
 
@@ -248,7 +248,7 @@
 																	0,
 																	minX,
 																	minY), transform));
-	[[self positiveSumQuadrantColour] setFill];
+	[[self positiveQuadrantColour] setFill];
 	CGContextFillPath(context);
 	
 	
@@ -261,7 +261,7 @@
 																	0,
 																	minX,
 																	maxY), transform));
-	[[self negativeSumQuadrantColour] setFill];
+	[[self negativeQuadrantColour] setFill];
 	CGContextFillPath(context);
 	
 	

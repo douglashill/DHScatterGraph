@@ -20,8 +20,8 @@ typedef NSString *(^labelFormattingBlock)(CGFloat number);
 @property (nonatomic) CGFloat yMinimum; // Minimum value for the Y axis. If data goes smaller, that will be used instead.
 @property (nonatomic) CGFloat yMaximum; // Maximum value for the Y axis. If data goes greater, that will be used instead.
 
-@property (nonatomic, retain) DH_COLOUR_CLASS *positiveSumQuadrantColour; // Background in upper-right and lower-left
-@property (nonatomic, retain) DH_COLOUR_CLASS *negativeSumQuadrantColour; // Background in upper-left and lower-right
+@property (nonatomic, retain) DH_COLOUR_CLASS *positiveQuadrantColour; // Background in upper-right and lower-left
+@property (nonatomic, retain) DH_COLOUR_CLASS *negativeQuadrantColour; // Background in upper-left and lower-right
 
 @property (nonatomic) CGFloat lineWidth; // Width in points of plotted line
 @property (nonatomic, retain) DH_COLOUR_CLASS *lineColour; // Colour of plotted line
