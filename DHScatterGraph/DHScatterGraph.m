@@ -1,7 +1,7 @@
 //
 //  DHScatterGraph.m
 //
-//  Douglas Hill, 5 January 2012
+//  Douglas Hill, 6 January 2012
 //  https://github.com/douglashill/DHScatterGraph
 //
 
@@ -66,7 +66,7 @@
 	[self setLineColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.4, 1.0)]];
 	
 	[self setValueLabelOffset:CGSizeMake(2.0, 2.0)];
-	[self setValueLabelStepSize:CGSizeMake(10.0, 10.0)];
+	[self setValueLabelStepSize:CGSizeMake(-1, -1)];
 	[self setValueLabelFont:[DH_FONT_CLASS systemFontOfSize:14]];
 	[self setValueLabelColour:[DH_COLOUR_CLASS blackColor]];
 	[self setShowValueLabelsAtOrigin:NO];
@@ -82,7 +82,7 @@
 	
 	[self setGridWidth:1.0];
 	[self setGridColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.8, 1.0)]];
-	[self setGridStepSize:CGSizeMake(5.0, 5.0)];
+	[self setGridStepSize:CGSizeMake(-1, -1)];
 }
 
 

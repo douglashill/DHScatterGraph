@@ -1,7 +1,7 @@
 //
 //  DHScatterGraph.h
 //
-//  Douglas Hill, 5 January 2012
+//  Douglas Hill, 6 January 2012
 //  https://github.com/douglashill/DHScatterGraph
 //
 
@@ -27,7 +27,7 @@ typedef NSString *(^labelFormattingBlock)(CGFloat number);
 @property (nonatomic, retain) DH_COLOUR_CLASS *lineColour; // Colour of plotted line
 
 @property (nonatomic) CGSize valueLabelOffset; // Offset of centre of labels from axis, below or to the left positive (graph coordinate system)
-@property (nonatomic) CGSize valueLabelStepSize; // Step between value labels by the axes
+@property (nonatomic) CGSize valueLabelStepSize; // Step between value labels along the axes. Set to any negative value for automatic.
 @property (nonatomic, retain) DH_FONT_CLASS *valueLabelFont; // Typeface and size for value labels
 @property (nonatomic, retain) DH_COLOUR_CLASS *valueLabelColour; // Colour of value labels
 @property (nonatomic, getter = shouldShowValueLabelsAtOrigin) BOOL showValueLabelsAtOrigin; // Show or hide the labels for (0, 0), which are drawn on top of the axes
@@ -39,6 +39,6 @@ typedef NSString *(^labelFormattingBlock)(CGFloat number);
 
 @property (nonatomic) CGFloat gridWidth; // Thickness of lines for grid
 @property (nonatomic, retain) DH_COLOUR_CLASS *gridColour; // Colour of grid
-@property (nonatomic) CGSize gridStepSize; // Step between grid lines
+@property (nonatomic) CGSize gridStepSize; // Step between grid lines. Set to any negative value for automatic.
 
 @end
