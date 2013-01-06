@@ -298,7 +298,7 @@
 	CGFloat edgeFudge = 0.2;
 	CGFloat step = [self valueLabelStepSize].width;
 	if (step < 0) {
-		step = automaticStepForRange(maxX - minX);
+		step = automaticStep(maxX - minX, [self bounds].size.width);
 	}
 	
 	for (CGFloat num = step * ceilf(minX / step + edgeFudge); num < maxX; num += step) {
@@ -317,7 +317,7 @@
 	step = [self valueLabelStepSize].height;
 	
 	if (step < 0) {
-		step = automaticStepForRange(maxY - minY);
+		step = automaticStep(maxY - minY, [self bounds].size.height);
 	}
 	
 	for (CGFloat num = step * ceilf(minY / step + edgeFudge); num < maxY; num += step) {
@@ -365,7 +365,7 @@
 	CGFloat edgeFudge = 0.1;
 	CGFloat step = [self gridStepSize].width;
 	if (step < 0) {
-		step = automaticStepForRange(maxX - minX);
+		step = automaticStep(maxX - minX, [self bounds].size.width);
 	}
 	
 	// Vertical grid lines
@@ -380,7 +380,7 @@
 	step = [self gridStepSize].height;
 	
 	if (step < 0) {
-		step = automaticStepForRange(maxY - minY);
+		step = automaticStep(maxY - minY, [self bounds].size.height);
 	}
 	
 	for (CGFloat y = step * ceilf(minY / step + edgeFudge); y < maxY; y += step) {
@@ -477,9 +477,10 @@
 	CGContextAddLineToPoint(context, point.x, point.y);
 }
 
-CGFloat automaticStepForRange(CGFloat range)
+CGFloat automaticStep(CGFloat dataRange, CGFloat screenPoints)
 {
-	CGFloat target = range / 8.0;
+	CGFloat numberOfDivisions = screenPoints / 50.0;
+	CGFloat target = dataRange / numberOfDivisions;
 	CGFloat magnitude = powf(10, floorf(log10f(target)));
 	
 	const int count = 4;
