@@ -20,8 +20,6 @@
 
 - (void)setDefaultProperties;
 - (void)calculateExtrema;
-- (void)drawGridLinesInContent:(CGContextRef)context
-				 withTransform:(CGAffineTransform)transform;
 - (void)drawAxesInContent:(CGContextRef)context
 			withTransform:(CGAffineTransform)transform;
 - (void)addVerticalLineInContent:(CGContextRef)context
@@ -259,8 +257,42 @@
 	CGContextFillPath(context);
 	
 	
-	// Axes and grid lines
-	[self drawGridLinesInContent:context withTransform:transform];
+	// Grid lines
+	CGSize gridStep; // The actual step size used, resolved automatically if necessary
+	{
+		CGFloat lineWidth = [self gridWidth];
+		CGFloat edgeFudge = 0.1;
+		
+		gridStep = [self gridStepSize];
+		if (gridStep.width < 0) {
+			gridStep.width = automaticStep(maxX - minX, [self bounds].size.width);
+		}
+		if (gridStep.height < 0) {
+			gridStep.height = automaticStep(maxY - minY, [self bounds].size.height);
+		}
+		
+		// Vertical grid lines
+		for (CGFloat x = gridStep.width * ceilf(minX / gridStep.width + edgeFudge); x < maxX; x += gridStep.width) {
+			[self addVerticalLineInContent:context
+						   withXCoordinate:x
+								 withWidth:lineWidth
+							 withTransform:transform];
+		}
+		
+		// Hoizontal grid lines
+		for (CGFloat y = gridStep.height * ceilf(minY / gridStep.height + edgeFudge); y < maxY; y += gridStep.height) {
+			[self addHorizontalLineInContent:context
+							 withYCoordinate:y
+								   withWidth:lineWidth
+							   withTransform:transform];
+		}
+		
+		[[self gridColour] setStroke];
+		CGContextSetLineWidth(context, [self gridWidth]);
+		CGContextStrokePath(context);
+	}
+	
+	// Axes
 	[self drawAxesInContent:context withTransform:transform];	
 	
 	
@@ -288,14 +320,48 @@
 	// Add values along axes
 	
 	[[self valueLabelColour] setFill];
-	
+		
 	CGFloat edgeFudge = 0.2;
-	CGFloat step = [self valueLabelStepSize].width;
-	if (step < 0) {
-		step = automaticStep(maxX - minX, [self bounds].size.width);
+	CGSize labelStep = [self valueLabelStepSize];
+	if (labelStep.width <= 0) {
+		labelStep.width = gridStep.width;
+		// Approximate max label width with labels at extrema
+		CGSize sizeOfMaxLabel = [[self xFormattingBlock] ? [self xFormattingBlock](maxX) : [NSString stringWithFormat:@"%.0f", maxX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+		CGSize sizeOfMinLabel = [[self xFormattingBlock] ? [self xFormattingBlock](minX) : [NSString stringWithFormat:@"%.0f", minX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+		CGFloat labelMaxWidth = MAX(sizeOfMaxLabel.width, sizeOfMinLabel.width);
+		labelMaxWidth = labelMaxWidth / xScale;
+		// Multiple of 1, 2, 5, 10 etc. of grid step
+		while (labelStep.width < labelMaxWidth) {
+			labelStep.width *= 2.0;
+			if (labelStep.width < labelMaxWidth) {
+				labelStep.width *= 2.5;
+				if (labelStep.width < labelMaxWidth) {
+					labelStep.width *= 2.0;
+				}
+			}
+		}
+	}
+	if (labelStep.height <= 0) {
+		labelStep.height = gridStep.height;
+		// Approximate max label height with labels at extrema
+		CGSize sizeOfMaxLabel = [[self yFormattingBlock] ? [self yFormattingBlock](maxY) : [NSString stringWithFormat:@"%.0f", maxY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+		CGSize sizeOfMinLabel = [[self yFormattingBlock] ? [self yFormattingBlock](minY) : [NSString stringWithFormat:@"%.0f", minY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+		CGFloat labelMaxHeight = MAX(sizeOfMaxLabel.height, sizeOfMinLabel.height);
+		labelMaxHeight = labelMaxHeight / yScale;
+		// Multiple of 1, 2, 5, 10 etc. of grid step
+		while (labelStep.height < labelMaxHeight) {
+			labelStep.height *= 2.0;
+			if (labelStep.height < labelMaxHeight) {
+				labelStep.height *= 2.5;
+				if (labelStep.height < labelMaxHeight) {
+					labelStep.height *= 2.0;
+				}
+			}
+		}
+
 	}
 	
-	for (CGFloat num = step * ceilf(minX / step + edgeFudge); num < maxX; num += step) {
+	for (CGFloat num = labelStep.width * ceilf(minX / labelStep.width + edgeFudge); num < maxX; num += labelStep.width) {
 		if (num == 0.0 && ![self shouldShowValueLabelsAtOrigin])
 			continue;
 		
@@ -308,13 +374,7 @@
 		[text DH_STRING_DRAW_METHOD(textRect, [self valueLabelFont])];
 	}
 	
-	step = [self valueLabelStepSize].height;
-	
-	if (step < 0) {
-		step = automaticStep(maxY - minY, [self bounds].size.height);
-	}
-	
-	for (CGFloat num = step * ceilf(minY / step + edgeFudge); num < maxY; num += step) {
+	for (CGFloat num = labelStep.height * ceilf(minY / labelStep.height + edgeFudge); num < maxY; num += labelStep.height) {
 		if (num == 0 && ![self shouldShowValueLabelsAtOrigin])
 			continue;
 		
@@ -353,43 +413,6 @@
 	maxX += horizontalPadding;
 	minY -= verticalPadding;
 	maxY += verticalPadding;
-}
-
-- (void)drawGridLinesInContent:(CGContextRef)context
-				 withTransform:(CGAffineTransform)transform
-{
-	CGFloat lineWidth = [self gridWidth];
-	CGFloat edgeFudge = 0.1;
-	CGFloat step = [self gridStepSize].width;
-	if (step < 0) {
-		step = automaticStep(maxX - minX, [self bounds].size.width);
-	}
-	
-	// Vertical grid lines
-	for (CGFloat x = step * ceilf(minX / step + edgeFudge); x < maxX; x += step) {
-		[self addVerticalLineInContent:context
-					   withXCoordinate:x
-							 withWidth:lineWidth
-						 withTransform:transform];
-	}
-	
-	// Hoizontal grid lines
-	step = [self gridStepSize].height;
-	
-	if (step < 0) {
-		step = automaticStep(maxY - minY, [self bounds].size.height);
-	}
-	
-	for (CGFloat y = step * ceilf(minY / step + edgeFudge); y < maxY; y += step) {
-		[self addHorizontalLineInContent:context
-						 withYCoordinate:y
-							   withWidth:lineWidth
-						   withTransform:transform];
-	}
-	
-	[[self gridColour] setStroke];
-	CGContextSetLineWidth(context, [self gridWidth]);
-	CGContextStrokePath(context);
 }
 
 - (void)drawAxesInContent:(CGContextRef)context
