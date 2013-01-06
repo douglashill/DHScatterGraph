@@ -297,6 +297,9 @@
 	
 	CGFloat edgeFudge = 0.2;
 	CGFloat step = [self valueLabelStepSize].width;
+	if (step < 0) {
+		step = automaticStepForRange(maxX - minX);
+	}
 	
 	for (CGFloat num = step * ceilf(minX / step + edgeFudge); num < maxX; num += step) {
 		if (num == 0.0 && ![self shouldShowValueLabelsAtOrigin])
@@ -312,6 +315,10 @@
 	}
 	
 	step = [self valueLabelStepSize].height;
+	
+	if (step < 0) {
+		step = automaticStepForRange(maxY - minY);
+	}
 	
 	for (CGFloat num = step * ceilf(minY / step + edgeFudge); num < maxY; num += step) {
 		if (num == 0 && ![self shouldShowValueLabelsAtOrigin])
@@ -357,6 +364,9 @@
 	CGFloat lineWidth = [self gridWidth];
 	CGFloat edgeFudge = 0.1;
 	CGFloat step = [self gridStepSize].width;
+	if (step < 0) {
+		step = automaticStepForRange(maxX - minX);
+	}
 	
 	// Vertical grid lines
 	for (CGFloat x = step * ceilf(minX / step + edgeFudge); x < maxX; x += step) {
@@ -368,6 +378,11 @@
 	
 	// Hoizontal grid lines
 	step = [self gridStepSize].height;
+	
+	if (step < 0) {
+		step = automaticStepForRange(maxY - minY);
+	}
+	
 	for (CGFloat y = step * ceilf(minY / step + edgeFudge); y < maxY; y += step) {
 		[self addHorizontalLineInContent:context
 						 withYCoordinate:y
@@ -460,6 +475,29 @@
 		point.y = floorf(point.y + 0.5);
 	}
 	CGContextAddLineToPoint(context, point.x, point.y);
+}
+
+CGFloat automaticStepForRange(CGFloat range)
+{
+	CGFloat target = range / 8.0;
+	CGFloat magnitude = powf(10, floorf(log10f(target)));
+	
+	const int count = 4;
+	int multipliers[count] = {1, 2, 5, 10};
+	CGFloat smallestDifference = CGFLOAT_MAX;
+	int indexOfClosestMultiplier = 0;
+	
+	for (int index = 0; index < count; index++) {
+		CGFloat difference = ABS(multipliers[index] * magnitude - target);
+		if (difference < smallestDifference) {
+			smallestDifference = difference;
+			indexOfClosestMultiplier = index;
+		}
+	}
+	
+	CGFloat step = multipliers[indexOfClosestMultiplier] * magnitude;
+	
+	return step;
 }
 
 @end
