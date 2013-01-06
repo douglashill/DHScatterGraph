@@ -13,7 +13,7 @@ typedef NSString *(^labelFormattingBlock)(CGFloat number);
 
 @property (nonatomic, retain) NSArray *dataPoints; // Ordered CGPoints in NSValues
 
-@property (nonatomic) CGSize padding; // Extra space beyond extrema of data (graph coordinate system)
+@property (nonatomic, assign) CGSize paddingFraction; // Extra space beyond extrema of data as a fraction of the range of the data. Default 0.1.
 
 @property (nonatomic) CGFloat xMinimum; // Minimum value for the X axis. If data goes smaller, that will be used instead.
 @property (nonatomic) CGFloat xMaximum; // Maximum value for the X axis. If data goes greater, that will be used instead.

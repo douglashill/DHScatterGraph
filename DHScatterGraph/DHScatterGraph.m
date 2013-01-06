@@ -57,7 +57,7 @@
 {
 	DH_CONTENT_MODE_CONFIGURATION;
 	
-	[self setPadding:CGSizeMake(5.0, 5.0)];
+	[self setPaddingFraction:CGSizeMake(0.1, 0.1)];
 	
 	[self setPositiveQuadrantColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.94, 1.0)]];
 	[self setNegativeQuadrantColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.91, 1.0)]];
@@ -88,9 +88,9 @@
 	[self DH_SET_NEEDS_DISPLAY_METHOD];
 }
 
-- (void)setPadding:(CGSize)padding
+- (void)setPaddingFraction:(CGSize)paddingFraction
 {
-	_padding = padding;
+	_paddingFraction = paddingFraction;
 	[self DH_SET_NEEDS_DISPLAY_METHOD];
 }
 
@@ -346,10 +346,13 @@
 		maxY = MAX(maxY, point.y);
 	}
 	
-	minX -= [self padding].width;
-	maxX += [self padding].width;
-	minY -= [self padding].height;
-	maxY += [self padding].height;
+	CGFloat horizontalPadding = [self paddingFraction].width * (maxX - minX);
+	CGFloat verticalPadding = [self paddingFraction].height * (maxY - minY);
+	
+	minX -= horizontalPadding;
+	maxX += horizontalPadding;
+	minY -= verticalPadding;
+	maxY += verticalPadding;
 }
 
 - (void)drawGridLinesInContent:(CGContextRef)context
