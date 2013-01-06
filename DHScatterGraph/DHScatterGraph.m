@@ -70,12 +70,6 @@
 	[self setValueLabelFont:[DH_FONT_CLASS systemFontOfSize:14]];
 	[self setValueLabelColour:[DH_COLOUR_CLASS blackColor]];
 	[self setShowValueLabelsAtOrigin:NO];
-	[self setXFormattingBlock:^NSString *(CGFloat number) {
-		return [NSString stringWithFormat:@"%.0f", number];
-	}];
-	[self setYFormattingBlock:^NSString *(CGFloat number) {
-		return [NSString stringWithFormat:@"%.0f", number];
-	}];
 	
 	[self setAxesWidth:1.0];
 	[self setAxesColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.4, 1.0)]];
@@ -305,7 +299,7 @@
 		if (num == 0.0 && ![self shouldShowValueLabelsAtOrigin])
 			continue;
 		
-		NSString *text = [self xFormattingBlock](num);
+		NSString *text = [self xFormattingBlock] ? [self xFormattingBlock](num) : [NSString stringWithFormat:@"%.0f", num];
 		CGRect textRect;
 		textRect.size = [text DH_STRING_SIZE_METHOD([self valueLabelFont])];
 		CGPoint textCentre = CGPointApplyAffineTransform(CGPointMake(num, - [self valueLabelOffset].width), transform);
@@ -324,7 +318,7 @@
 		if (num == 0 && ![self shouldShowValueLabelsAtOrigin])
 			continue;
 		
-		NSString *text = [self yFormattingBlock](num);
+		NSString *text = [self yFormattingBlock] ? [self yFormattingBlock](num) : [NSString stringWithFormat:@"%.0f", num];
 		CGRect textRect;
 		textRect.size = [text DH_STRING_SIZE_METHOD([self valueLabelFont])];
 		CGPoint textCentre = CGPointApplyAffineTransform(CGPointMake(- [self valueLabelOffset].height, num), transform);
