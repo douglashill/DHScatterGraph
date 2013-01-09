@@ -7,7 +7,7 @@
 
 #import "DHScatterGraph.h"
 
-@interface DHScatterGraph ()
+@implementation DHScatterGraph
 {
 	CGFloat minX;
 	CGFloat maxX;
@@ -17,25 +17,6 @@
 	CGFloat xScale;
 	CGFloat yScale;
 }
-
-- (void)setDefaultProperties;
-- (void)calculateExtrema;
-- (void)drawGridLinesInContent:(CGContextRef)context
-				 withTransform:(CGAffineTransform)transform;
-- (void)drawAxesInContent:(CGContextRef)context
-			withTransform:(CGAffineTransform)transform;
-- (void)addVerticalLineInContent:(CGContextRef)context
-				 withXCoordinate:(CGFloat)x
-					   withWidth:(CGFloat)lineWidth
-				   withTransform:(CGAffineTransform)transform;
-- (void)addHorizontalLineInContent:(CGContextRef)context
-				   withYCoordinate:(CGFloat)y
-						 withWidth:(CGFloat)lineWidth
-					 withTransform:(CGAffineTransform)transform;
-
-@end
-
-@implementation DHScatterGraph
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -272,7 +253,7 @@
 	
 	// Plot
 	
-	CGPoint firstPoint = [[[self dataPoints] objectAtIndex:0] DH_POINT_VALUE_METHOD];
+	CGPoint firstPoint = [[self dataPoints][0] DH_POINT_VALUE_METHOD];
 	firstPoint = CGPointApplyAffineTransform(firstPoint, transform);
 	CGContextMoveToPoint(context,
 						 firstPoint.x,
