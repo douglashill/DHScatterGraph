@@ -1,7 +1,7 @@
 //
 //  DHScatterGraph.m
 //
-//  Douglas Hill, 6 January 2012
+//  Douglas Hill, 11 January 2012
 //  https://github.com/douglashill/DHScatterGraph
 //
 
@@ -43,9 +43,6 @@
 	[self setPositiveQuadrantColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.94, 1.0)]];
 	[self setNegativeQuadrantColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.91, 1.0)]];
 	
-	[self setLineWidth:2.0];
-	[self setLineColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.4, 1.0)]];
-	
 	[self setValueLabelOffset:CGSizeMake(2.0, 2.0)];
 	[self setValueLabelStepSize:CGSizeMake(-1, -1)];
 	[self setValueLabelFont:[DH_FONT_CLASS systemFontOfSize:14]];
@@ -63,9 +60,51 @@
 
 #pragma mark - Custom accessors
 
+- (NSArray *)dataPoints
+{
+	if ([[self multipleDataPoints] count]) {
+		return [self multipleDataPoints][0];
+	}
+	return nil;
+}
+
 - (void)setDataPoints:(NSArray *)dataPoints
 {
-	_dataPoints = dataPoints;
+	[self setMultipleDataPoints:@[dataPoints]];
+}
+
+- (CGFloat)lineWidth
+{
+	if ([[self lineWidths] count]) {
+		return [[self lineWidths][0] floatValue];
+	}
+	return 0;
+}
+
+- (void)setLineWidth:(CGFloat)lineWidth
+{
+	[self setLineWidths:@[@(lineWidth)]];
+}
+
+- (DH_COLOUR_CLASS *)lineColour
+{
+	if ([[self lineColours] count]) {
+		return [self lineColours][0];
+	}
+	return nil;
+}
+
+- (void)setLineColour:(DH_COLOUR_CLASS *)lineColour
+{
+	[self setLineColours:@[lineColour]];
+}
+
+
+#pragma mark - Accessors causing redisplay
+
+- (void)setMultipleDataPoints:(NSArray *)multipleDataPoints
+{
+	_multipleDataPoints = multipleDataPoints;
 	[self DH_SET_NEEDS_DISPLAY_METHOD];
 }
 
@@ -111,15 +150,15 @@
 	[self DH_SET_NEEDS_DISPLAY_METHOD];
 }
 
-- (void)setLineWidth:(CGFloat)lineWidth
+- (void)setLineWidths:(NSArray *)lineWidths
 {
-	_lineWidth = lineWidth;
+	_lineWidths = lineWidths;
 	[self DH_SET_NEEDS_DISPLAY_METHOD];
 }
 
-- (void)setLineColour:(DH_COLOUR_CLASS *)lineColour
+- (void)setLineColours:(NSArray *)lineColours
 {
-	_lineColour = lineColour;
+	_lineColours = lineColours;
 	[self DH_SET_NEEDS_DISPLAY_METHOD];
 }
 
@@ -281,23 +320,39 @@
 	
 	// Plot
 	
-	CGPoint firstPoint = [[self dataPoints][0] DH_POINT_VALUE_METHOD];
-	firstPoint = CGPointApplyAffineTransform(firstPoint, transform);
-	CGContextMoveToPoint(context,
-						 firstPoint.x,
-						 firstPoint.y);
-	
-	for (NSValue *value in [self dataPoints]) {
-		CGPoint point = [value DH_POINT_VALUE_METHOD];
-		point = CGPointApplyAffineTransform(point, transform);
-		CGContextAddLineToPoint(context,
-								point.x ,
-								point.y );
-	}
-	
-	CGContextSetLineWidth(context, [self lineWidth]);
-	[[self lineColour] setStroke];
-	CGContextStrokePath(context);
+	[[self multipleDataPoints] enumerateObjectsUsingBlock:^(NSArray *dataPoints, NSUInteger idx, BOOL *stop) {
+		CGPoint firstPoint = [dataPoints[0] DH_POINT_VALUE_METHOD];
+		firstPoint = CGPointApplyAffineTransform(firstPoint, transform);
+		CGContextMoveToPoint(context,
+							 firstPoint.x,
+							 firstPoint.y);
+		
+		for (NSValue *value in dataPoints) {
+			CGPoint point = [value DH_POINT_VALUE_METHOD];
+			point = CGPointApplyAffineTransform(point, transform);
+			CGContextAddLineToPoint(context,
+									point.x ,
+									point.y );
+		}
+		
+		CGFloat lineWidth = 2;
+		if ([[self lineWidths] count]) {
+			NSUInteger lineWidthsIndex = MIN([[self lineWidths] count] - 1, idx);
+			lineWidth = [[self lineWidths][lineWidthsIndex] floatValue];
+		}
+		CGContextSetLineWidth(context, lineWidth);
+		
+		DH_COLOUR_CLASS *lineColour;
+		if ([[self lineColours] count]) {
+			NSUInteger lineColourIndex = MIN([[self lineColours] count] - 1, idx);
+			lineColour = [self lineColours][lineColourIndex];
+		} else {
+			lineColour = [DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.4, 1.0)];
+		}
+		[lineColour setStroke];
+		
+		CGContextStrokePath(context);
+	}];
 	
 	
 	// Add values along axes
@@ -381,12 +436,14 @@
 	minY = [self yMinimum];
 	maxY = [self yMaximum];
 	
-	for (NSValue *value in [self dataPoints]) {
-		CGPoint point = [value DH_POINT_VALUE_METHOD];
-		minX = MIN(minX, point.x);
-		maxX = MAX(maxX, point.x);
-		minY = MIN(minY, point.y);
-		maxY = MAX(maxY, point.y);
+	for (NSArray *dataPoints in [self multipleDataPoints]) {
+		for (NSValue *value in dataPoints) {
+			CGPoint point = [value DH_POINT_VALUE_METHOD];
+			minX = MIN(minX, point.x);
+			maxX = MAX(maxX, point.x);
+			minY = MIN(minY, point.y);
+			maxY = MAX(maxY, point.y);
+		}
 	}
 	
 	CGFloat horizontalPadding = [self paddingFraction].width * (maxX - minX);
