@@ -5,7 +5,7 @@
 //  https://github.com/douglashill/DHScatterGraph
 //
 
-#import "DHScatterGraphPlatformDefines.h"
+#import "DHScatterGraphDefinitions.h"
 
 typedef NSString *(^labelFormattingBlock)(CGFloat number);
 

@@ -12,7 +12,7 @@ Compiler with automatic property synthesis (Xcode 4.4 or later). `DHScatterGraph
 
 ## Usage ##
 
-Add the two `DHScatterGraph` class files and one platform-specific definitions header file (`DHScatterGraphPlatformDefines.h` for either iOS or OS X) to your project.
+Add the two `DHScatterGraph` class files and one platform-specific definitions header file (`DHScatterGraphDefinitions.h` for either iOS or OS X) to your project.
 
 Put the graph on screen like any other view. The graph’s appearance is entirely controlled by properties. The data to plot is provided as an array of `NSValue` objects wrapping `CGPoint` structs containing the (x, y) coordinates to plot.
 

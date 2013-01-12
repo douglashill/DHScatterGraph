@@ -38,7 +38,7 @@
 		A583892C169890CD0081C26D /* ScatterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScatterViewController.m; sourceTree = "<group>"; };
 		A583892E1698914C0081C26D /* DHScatterGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DHScatterGraph.h; path = ../../DHScatterGraph/DHScatterGraph.h; sourceTree = "<group>"; };
 		A583892F1698914C0081C26D /* DHScatterGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DHScatterGraph.m; path = ../../DHScatterGraph/DHScatterGraph.m; sourceTree = "<group>"; };
-		A5838931169891580081C26D /* DHScatterGraphPlatformDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DHScatterGraphPlatformDefines.h; path = "../../DHScatterGraph/iOS Platform Defines/DHScatterGraphPlatformDefines.h"; sourceTree = "<group>"; };
+		A5838931169891580081C26D /* DHScatterGraphDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DHScatterGraphDefinitions.h; path = "../../DHScatterGraph/iOS Platform Definitions/DHScatterGraphDefinitions.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +89,7 @@
 				A583891E1698906D0081C26D /* ScatterAppDelegate.m */,
 				A583892B169890CD0081C26D /* ScatterViewController.h */,
 				A583892C169890CD0081C26D /* ScatterViewController.m */,
-				A5838931169891580081C26D /* DHScatterGraphPlatformDefines.h */,
+				A5838931169891580081C26D /* DHScatterGraphDefinitions.h */,
 				A583892E1698914C0081C26D /* DHScatterGraph.h */,
 				A583892F1698914C0081C26D /* DHScatterGraph.m */,
 				A58389151698906D0081C26D /* Supporting Files */,
@@ -291,6 +291,7 @@
 				A583892A1698906D0081C26D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

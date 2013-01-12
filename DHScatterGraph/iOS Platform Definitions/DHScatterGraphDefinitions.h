@@ -1,7 +1,7 @@
 //
-//  DHScatterGraphPlatformDefines.h (iOS)
+//  DHScatterGraphDefinitions.h (iOS)
 //
-//  Douglas Hill, 5 January 2012
+//  Douglas Hill, 12 January 2012
 //  https://github.com/douglashill/DHScatterGraph
 //
 
