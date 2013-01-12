@@ -357,8 +357,8 @@
 	if (labelStep.width <= 0) {
 		labelStep.width = gridStep.width;
 		// Approximate max label width with labels at extrema
-		CGSize sizeOfMaxLabel = [[self xFormattingBlock] ? [self xFormattingBlock](maxX) : [NSString stringWithFormat:@"%.0f", maxX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
-		CGSize sizeOfMinLabel = [[self xFormattingBlock] ? [self xFormattingBlock](minX) : [NSString stringWithFormat:@"%.0f", minX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+		CGSize sizeOfMaxLabel = [[self xAxisText:maxX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+		CGSize sizeOfMinLabel = [[self xAxisText:minX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
 		CGFloat labelMaxWidth = MAX(sizeOfMaxLabel.width, sizeOfMinLabel.width);
 		labelMaxWidth = labelMaxWidth / xScale;
 		// Multiple of 1, 2, 5, 10 etc. of grid step
@@ -375,8 +375,8 @@
 	if (labelStep.height <= 0) {
 		labelStep.height = gridStep.height;
 		// Approximate max label height with labels at extrema
-		CGSize sizeOfMaxLabel = [[self yFormattingBlock] ? [self yFormattingBlock](maxY) : [NSString stringWithFormat:@"%.0f", maxY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
-		CGSize sizeOfMinLabel = [[self yFormattingBlock] ? [self yFormattingBlock](minY) : [NSString stringWithFormat:@"%.0f", minY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+		CGSize sizeOfMaxLabel = [[self yAxisText:maxY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+		CGSize sizeOfMinLabel = [[self yAxisText:minY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
 		CGFloat labelMaxHeight = MAX(sizeOfMaxLabel.height, sizeOfMinLabel.height);
 		labelMaxHeight = labelMaxHeight / yScale;
 		// Multiple of 1, 2, 5, 10 etc. of grid step
@@ -396,7 +396,7 @@
 		if (num == 0.0 && ![self shouldShowValueLabelsAtOrigin])
 			continue;
 		
-		NSString *text = [self xFormattingBlock] ? [self xFormattingBlock](num) : [NSString stringWithFormat:@"%.0f", num];
+		NSString *text = [self xAxisText:num];
 		CGRect textRect;
 		textRect.size = [text DH_STRING_SIZE_METHOD([self valueLabelFont])];
 		CGPoint textTopCentre = CGPointApplyAffineTransform(CGPointMake(num, 0), transform);
@@ -410,7 +410,7 @@
 		if (num == 0 && ![self shouldShowValueLabelsAtOrigin])
 			continue;
 		
-		NSString *text = [self yFormattingBlock] ? [self yFormattingBlock](num) : [NSString stringWithFormat:@"%.0f", num];
+		NSString *text = [self yAxisText:num];
 		CGRect textRect;
 		textRect.size = [text DH_STRING_SIZE_METHOD([self valueLabelFont])];
 		CGPoint textCentreRight = CGPointApplyAffineTransform(CGPointMake(0, num), transform);
@@ -529,6 +529,16 @@
 		point.y = floorf(point.y + 0.5);
 	}
 	CGContextAddLineToPoint(context, point.x, point.y);
+}
+
+- (NSString *)xAxisText:(CGFloat)num
+{
+	return [self xFormattingBlock] ? [self xFormattingBlock](num) : [NSString stringWithFormat:@"%.0f", num];
+}
+
+- (NSString *)yAxisText:(CGFloat)num
+{
+	return [self yFormattingBlock] ? [self yFormattingBlock](num) : [NSString stringWithFormat:@"%.0f", num];
 }
 
 CGFloat automaticStep(CGFloat dataRange, CGFloat screenPoints)
