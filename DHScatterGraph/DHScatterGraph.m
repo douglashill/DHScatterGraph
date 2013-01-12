@@ -356,17 +356,13 @@
 	CGSize labelStep = [self valueLabelStepSize];
 	if (labelStep.width <= 0) {
 		labelStep.width = gridStep.width;
-		// Approximate max label width with labels at extrema
-		CGSize sizeOfMaxLabel = [[self xAxisText:maxX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
-		CGSize sizeOfMinLabel = [[self xAxisText:minX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
-		CGFloat labelMaxWidth = MAX(sizeOfMaxLabel.width, sizeOfMinLabel.width);
-		labelMaxWidth = labelMaxWidth / xScale;
+		CGFloat maxLabelWidth = [self xAxisMaxLabelWidth] / xScale;
 		// Multiple of 1, 2, 5, 10 etc. of grid step
-		while (labelStep.width < labelMaxWidth) {
+		while (labelStep.width < maxLabelWidth) {
 			labelStep.width *= 2.0;
-			if (labelStep.width < labelMaxWidth) {
+			if (labelStep.width < maxLabelWidth) {
 				labelStep.width *= 2.5;
-				if (labelStep.width < labelMaxWidth) {
+				if (labelStep.width < maxLabelWidth) {
 					labelStep.width *= 2.0;
 				}
 			}
@@ -374,17 +370,13 @@
 	}
 	if (labelStep.height <= 0) {
 		labelStep.height = gridStep.height;
-		// Approximate max label height with labels at extrema
-		CGSize sizeOfMaxLabel = [[self yAxisText:maxY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
-		CGSize sizeOfMinLabel = [[self yAxisText:minY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
-		CGFloat labelMaxHeight = MAX(sizeOfMaxLabel.height, sizeOfMinLabel.height);
-		labelMaxHeight = labelMaxHeight / yScale;
+		CGFloat maxLabelHeight = [self yAxisMaxLabelHeight] / yScale;
 		// Multiple of 1, 2, 5, 10 etc. of grid step
-		while (labelStep.height < labelMaxHeight) {
+		while (labelStep.height < maxLabelHeight) {
 			labelStep.height *= 2.0;
-			if (labelStep.height < labelMaxHeight) {
+			if (labelStep.height < maxLabelHeight) {
 				labelStep.height *= 2.5;
-				if (labelStep.height < labelMaxHeight) {
+				if (labelStep.height < maxLabelHeight) {
 					labelStep.height *= 2.0;
 				}
 			}
@@ -403,6 +395,14 @@
 		textRect.origin.x = textTopCentre.x - textRect.size.width / 2.0;
 		CGFloat offset = DH_Y_POSITIVE * 0.6 * [[self valueLabelFont] pointSize] + (DH_Y_POSITIVE == 1.0 ? textRect.size.height : 0);
 		textRect.origin.y = textTopCentre.y - offset;
+		
+		// Ensure text is fully within bounds
+		if (DH_Y_POSITIVE == 1.0) {
+			textRect.origin.y = MAX(textRect.origin.y, 0.0);
+		} else {
+			textRect.origin.y = MIN(textRect.origin.y, [self bounds].size.height - textRect.size.height);
+		}
+		
 		[text DH_STRING_DRAW_METHOD(textRect, [self valueLabelFont])];
 	}
 	
@@ -415,6 +415,7 @@
 		textRect.size = [text DH_STRING_SIZE_METHOD([self valueLabelFont])];
 		CGPoint textCentreRight = CGPointApplyAffineTransform(CGPointMake(0, num), transform);
 		textRect.origin.x = textCentreRight.x - textRect.size.width - 0.8 * [[self valueLabelFont] pointSize];
+		textRect.origin.x = MAX(textRect.origin.x, 0.0); // Ensure text is fully within bounds
 		textRect.origin.y = textCentreRight.y - textRect.size.height / 2.0;
 		[text DH_STRING_DRAW_METHOD(textRect, [self valueLabelFont])];
 	}
@@ -539,6 +540,35 @@
 - (NSString *)yAxisText:(CGFloat)num
 {
 	return [self yFormattingBlock] ? [self yFormattingBlock](num) : [NSString stringWithFormat:@"%.0f", num];
+}
+
+// Approximate maximum widths and heights using labels at extrema
+- (CGFloat)xAxisMaxLabelWidth
+{
+	CGSize sizeOfMaxLabel = [[self xAxisText:maxX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+	CGSize sizeOfMinLabel = [[self xAxisText:minX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+	return MAX(sizeOfMaxLabel.width, sizeOfMinLabel.width);
+}
+
+- (CGFloat)xAxisMaxLabelHeight
+{
+	CGSize sizeOfMaxLabel = [[self xAxisText:maxX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+	CGSize sizeOfMinLabel = [[self xAxisText:minX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+	return MAX(sizeOfMaxLabel.height, sizeOfMinLabel.height);
+}
+
+- (CGFloat)yAxisMaxLabelWidth
+{
+	CGSize sizeOfMaxLabel = [[self yAxisText:maxY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+	CGSize sizeOfMinLabel = [[self yAxisText:minY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+	return MAX(sizeOfMaxLabel.width, sizeOfMinLabel.width);
+}
+
+- (CGFloat)yAxisMaxLabelHeight
+{
+	CGSize sizeOfMaxLabel = [[self yAxisText:maxY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+	CGSize sizeOfMinLabel = [[self yAxisText:minY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+	return MAX(sizeOfMaxLabel.height, sizeOfMinLabel.height);
 }
 
 CGFloat automaticStep(CGFloat dataRange, CGFloat screenPoints)
