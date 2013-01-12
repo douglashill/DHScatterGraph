@@ -24,4 +24,5 @@
 
 #define DH_POINT_VALUE_METHOD pointValue
 
+#define DH_Y_POSITIVE 1.0
 #define DH_TRANSFORM_FOR_LOWER_LEFT_ORIGIN(HEIGHT) CGAffineTransformIdentity

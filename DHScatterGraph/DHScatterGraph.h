@@ -30,7 +30,6 @@ typedef NSString *(^labelFormattingBlock)(CGFloat number);
 @property (nonatomic, retain) DH_COLOUR_CLASS *lineColour; // Colour of first plotted line
 @property (nonatomic, strong) NSArray *lineColours; // Array of DH_COLOUR_CLASS objects. Colours for multiple plotted lines
 
-@property (nonatomic) CGSize valueLabelOffset; // Offset of centre of labels from axis, below or to the left positive (graph coordinate system)
 @property (nonatomic) CGSize valueLabelStepSize; // Step between value labels along the axes. Set to any negative value for automatic.
 @property (nonatomic, retain) DH_FONT_CLASS *valueLabelFont; // Typeface and size for value labels
 @property (nonatomic, retain) DH_COLOUR_CLASS *valueLabelColour; // Colour of value labels

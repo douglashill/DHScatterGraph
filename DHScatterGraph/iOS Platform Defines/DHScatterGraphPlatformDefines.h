@@ -24,4 +24,5 @@
 
 #define DH_POINT_VALUE_METHOD CGPointValue
 
+#define DH_Y_POSITIVE - 1.0
 #define DH_TRANSFORM_FOR_LOWER_LEFT_ORIGIN(HEIGHT) CGAffineTransformScale(CGAffineTransformMakeTranslation(0.0, HEIGHT), 1.0, -1.0);

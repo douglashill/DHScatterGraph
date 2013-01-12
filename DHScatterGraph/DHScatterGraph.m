@@ -43,7 +43,6 @@
 	[self setPositiveQuadrantColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.94, 1.0)]];
 	[self setNegativeQuadrantColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.91, 1.0)]];
 	
-	[self setValueLabelOffset:CGSizeMake(2.0, 2.0)];
 	[self setValueLabelStepSize:CGSizeMake(-1, -1)];
 	[self setValueLabelFont:[DH_FONT_CLASS systemFontOfSize:14]];
 	[self setValueLabelColour:[DH_COLOUR_CLASS blackColor]];
@@ -159,12 +158,6 @@
 - (void)setLineColours:(NSArray *)lineColours
 {
 	_lineColours = lineColours;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setValueLabelOffset:(CGSize)valueLabelOffset
-{
-	_valueLabelOffset = valueLabelOffset;
 	[self DH_SET_NEEDS_DISPLAY_METHOD];
 }
 
@@ -406,9 +399,10 @@
 		NSString *text = [self xFormattingBlock] ? [self xFormattingBlock](num) : [NSString stringWithFormat:@"%.0f", num];
 		CGRect textRect;
 		textRect.size = [text DH_STRING_SIZE_METHOD([self valueLabelFont])];
-		CGPoint textCentre = CGPointApplyAffineTransform(CGPointMake(num, - [self valueLabelOffset].width), transform);
-		textRect.origin.x = textCentre.x - textRect.size.width / 2;
-		textRect.origin.y = textCentre.y - textRect.size.height / 2;
+		CGPoint textTopCentre = CGPointApplyAffineTransform(CGPointMake(num, 0), transform);
+		textRect.origin.x = textTopCentre.x - textRect.size.width / 2.0;
+		CGFloat offset = DH_Y_POSITIVE * 0.6 * [[self valueLabelFont] pointSize] + (DH_Y_POSITIVE == 1.0 ? textRect.size.height : 0);
+		textRect.origin.y = textTopCentre.y - offset;
 		[text DH_STRING_DRAW_METHOD(textRect, [self valueLabelFont])];
 	}
 	
@@ -419,9 +413,9 @@
 		NSString *text = [self yFormattingBlock] ? [self yFormattingBlock](num) : [NSString stringWithFormat:@"%.0f", num];
 		CGRect textRect;
 		textRect.size = [text DH_STRING_SIZE_METHOD([self valueLabelFont])];
-		CGPoint textCentre = CGPointApplyAffineTransform(CGPointMake(- [self valueLabelOffset].height, num), transform);
-		textRect.origin.x = textCentre.x - textRect.size.width / 2;
-		textRect.origin.y = textCentre.y - textRect.size.height / 2;
+		CGPoint textCentreRight = CGPointApplyAffineTransform(CGPointMake(0, num), transform);
+		textRect.origin.x = textCentreRight.x - textRect.size.width - 0.8 * [[self valueLabelFont] pointSize];
+		textRect.origin.y = textCentreRight.y - textRect.size.height / 2.0;
 		[text DH_STRING_DRAW_METHOD(textRect, [self valueLabelFont])];
 	}
 }
