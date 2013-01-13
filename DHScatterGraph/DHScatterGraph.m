@@ -6,6 +6,7 @@
 //
 
 #import "DHScatterGraph.h"
+#import <objc/runtime.h>
 
 @implementation DHScatterGraph
 {
@@ -21,7 +22,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
 	if (self = [super initWithFrame:frame]) {
-		[self setDefaultProperties];
+		[self initialise];
 	}
 	return self;
 }
@@ -29,12 +30,12 @@
 - (id)initWithCoder:(NSCoder *)decoder
 {
 	if (self = [super initWithCoder:decoder]) {
-		[self setDefaultProperties];
+		[self initialise];
 	}
 	return self;
 }
 
-- (void)setDefaultProperties
+- (void)initialise
 {
 	DH_CONTENT_MODE_CONFIGURATION;
 	
@@ -54,8 +55,24 @@
 	[self setGridWidth:1.0];
 	[self setGridColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.8, 1.0)]];
 	[self setGridStepSize:CGSizeMake(-1, -1)];
+	
+	for (NSString *propertyName in DHScatterGraph_getPropertyNames()) {
+		[self addObserver:self forKeyPath:propertyName options:0 context:NULL];
+	}
 }
 
+
+#pragma mark - Key value observing
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+					  ofObject:(id)object
+						change:(NSDictionary *)change
+					   context:(void *)context
+{
+	if (object == self && [DHScatterGraph_getPropertyNames() containsObject:keyPath]) {
+		[self DH_SET_NEEDS_DISPLAY_METHOD];
+	}
+}
 
 #pragma mark - Custom accessors
 
@@ -96,135 +113,6 @@
 - (void)setLineColour:(DH_COLOUR_CLASS *)lineColour
 {
 	[self setLineColours:@[lineColour]];
-}
-
-
-#pragma mark - Accessors causing redisplay
-
-- (void)setMultipleDataPoints:(NSArray *)multipleDataPoints
-{
-	_multipleDataPoints = multipleDataPoints;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setPaddingFraction:(CGSize)paddingFraction
-{
-	_paddingFraction = paddingFraction;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setXMinimum:(CGFloat)xMinimum
-{
-	_xMinimum = xMinimum;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setXMaximum:(CGFloat)xMaximum
-{
-	_xMaximum = xMaximum;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setYMinimum:(CGFloat)yMinimum
-{
-	_yMinimum = yMinimum;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setYMaximum:(CGFloat)yMaximum
-{
-	_yMaximum = yMaximum;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setPositiveQuadrantColour:(DH_COLOUR_CLASS *)positiveQuadrantColour
-{
-	_positiveQuadrantColour = positiveQuadrantColour;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setNegativeQuadrantColour:(DH_COLOUR_CLASS *)negativeQuadrantColour
-{
-	_negativeQuadrantColour = negativeQuadrantColour;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setLineWidths:(NSArray *)lineWidths
-{
-	_lineWidths = lineWidths;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setLineColours:(NSArray *)lineColours
-{
-	_lineColours = lineColours;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setValueLabelStepSize:(CGSize)valueLabelStepSize
-{
-	_valueLabelStepSize = valueLabelStepSize;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setValueLabelFont:(DH_FONT_CLASS *)valueLabelFont
-{
-	_valueLabelFont = valueLabelFont;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setValueLabelColour:(DH_COLOUR_CLASS *)valueLabelColour
-{
-	_valueLabelColour = valueLabelColour;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setShowValueLabelsAtOrigin:(BOOL)showValueLabelsAtOrigin
-{
-	_showValueLabelsAtOrigin = showValueLabelsAtOrigin;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-//- (void)setXFormattingBlock:(labelFormattingBlock)xFormattingBlock
-//{
-//	_xFormattingBlock = [xFormattingBlock copy];
-//	[self DH_SET_NEEDS_DISPLAY_METHOD];
-//}
-//
-//- (void)setYFormattingBlock:(labelFormattingBlock)yFormattingBlock
-//{
-//	_yFormattingBlock = [yFormattingBlock copy];
-//	[self DH_SET_NEEDS_DISPLAY_METHOD];
-//}
-
-- (void)setAxesWidth:(CGFloat)axesWidth
-{
-	_axesWidth = axesWidth;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setAxesColour:(DH_COLOUR_CLASS *)axesColour
-{
-	_axesColour = axesColour;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setGridWidth:(CGFloat)gridWidth
-{
-	_gridWidth = gridWidth;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setGridColour:(DH_COLOUR_CLASS *)gridColour
-{
-	_gridColour = gridColour;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
-}
-
-- (void)setGridStepSize:(CGSize)gridStepSize
-{
-	_gridStepSize = gridStepSize;
-	[self DH_SET_NEEDS_DISPLAY_METHOD];
 }
 
 
@@ -569,6 +457,25 @@
 	CGSize sizeOfMaxLabel = [[self yAxisText:maxY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
 	CGSize sizeOfMinLabel = [[self yAxisText:minY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
 	return MAX(sizeOfMaxLabel.height, sizeOfMinLabel.height);
+}
+
+
+#pragma mark - Functions
+
+NSArray *DHScatterGraph_getPropertyNames(void)
+{
+	id DHScatterGraphClass = objc_getClass("DHScatterGraph");
+	unsigned int propertyCount = 0;
+	objc_property_t *properties = class_copyPropertyList(DHScatterGraphClass, &propertyCount);
+	NSMutableArray *array = [NSMutableArray arrayWithCapacity:propertyCount];
+	
+	for (int idx = 0; idx < propertyCount; idx++) {
+		const char *name = property_getName(properties[idx]);
+		[array addObject:[NSString stringWithCString:name encoding:NSASCIIStringEncoding]];
+	}
+	
+	free(properties);
+	return array;
 }
 
 CGFloat automaticStep(CGFloat dataRange, CGFloat screenPoints)
