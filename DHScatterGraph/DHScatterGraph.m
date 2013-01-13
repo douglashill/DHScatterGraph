@@ -1,7 +1,7 @@
 //
 //  DHScatterGraph.m
 //
-//  Douglas Hill, 11 January 2012
+//  Douglas Hill, 13 January 2012
 //  https://github.com/douglashill/DHScatterGraph
 //
 

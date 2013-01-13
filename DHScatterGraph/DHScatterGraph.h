@@ -1,7 +1,7 @@
 //
 //  DHScatterGraph.h
 //
-//  Douglas Hill, 11 January 2012
+//  Douglas Hill, 13 January 2012
 //  https://github.com/douglashill/DHScatterGraph
 //
 
@@ -12,19 +12,19 @@ typedef NSString *(^labelFormattingBlock)(CGFloat number);
 @interface DHScatterGraph : DH_VIEW_CLASS
 
 @property (nonatomic, retain) NSArray *dataPoints; // Ordered CGPoints in NSValues. Convenient alternative to multipleDataPoints if only one set of data is to be shown
-@property (nonatomic, strong) NSArray *multipleDataPoints; // Array of NSArrays of ordered CGPoints in NSValues. For drawing multiple lines
+@property (nonatomic, strong) NSArray *multipleDataPoints; // Array of NSArrays of ordered CGPoints in NSValues. For drawing multiple lines. Default: no data
 
-@property (nonatomic, assign) CGSize paddingFraction; // Extra space beyond extrema of data as a fraction of the range of the data. Default 0.1.
+@property (nonatomic, assign) CGSize paddingFraction; // Extra space beyond extrema of data as a fraction of the range of the data. Default: 0.1
 
-@property (nonatomic) CGFloat xMinimum; // Minimum value for the X axis. If data goes smaller, that will be used instead.
-@property (nonatomic) CGFloat xMaximum; // Maximum value for the X axis. If data goes greater, that will be used instead.
-@property (nonatomic) CGFloat yMinimum; // Minimum value for the Y axis. If data goes smaller, that will be used instead.
-@property (nonatomic) CGFloat yMaximum; // Maximum value for the Y axis. If data goes greater, that will be used instead.
+@property (nonatomic) CGFloat xMinimum; // Minimum value for the X axis. If data goes smaller, that will be used instead. Default: 0
+@property (nonatomic) CGFloat xMaximum; // Maximum value for the X axis. If data goes greater, that will be used instead. Default: 0
+@property (nonatomic) CGFloat yMinimum; // Minimum value for the Y axis. If data goes smaller, that will be used instead. Default: 0
+@property (nonatomic) CGFloat yMaximum; // Maximum value for the Y axis. If data goes greater, that will be used instead. Default: 0
 
-@property (nonatomic, retain) DH_COLOUR_CLASS *positiveQuadrantColour; // Background in upper-right and lower-left
-@property (nonatomic, retain) DH_COLOUR_CLASS *negativeQuadrantColour; // Background in upper-left and lower-right
+@property (nonatomic, retain) DH_COLOUR_CLASS *positiveQuadrantColour; // Background in upper-right and lower-left. Default: 94% white, fully opaque
+@property (nonatomic, retain) DH_COLOUR_CLASS *negativeQuadrantColour; // Background in upper-left and lower-right. Default: 91% white, fully opaque
 
-@property (nonatomic) CGFloat lineWidth; // Width in points for plotted lines
+@property (nonatomic) CGFloat lineWidth; // Width in points for plotted lines. Default: 2
 @property (nonatomic, strong) NSArray *lineWidths; // Array of NSNumbers with floats. Widths of multiple plotted lines
 
 @property (nonatomic, retain) DH_COLOUR_CLASS *lineColour; // Colour of first plotted line
