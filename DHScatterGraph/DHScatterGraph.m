@@ -57,7 +57,10 @@
 	[self setGridStepSize:CGSizeMake(-1, -1)];
 	
 	for (NSString *propertyName in DHScatterGraph_getPropertyNames()) {
-		[self addObserver:self forKeyPath:propertyName options:0 context:NULL];
+		[self addObserver:self
+			   forKeyPath:propertyName
+				  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew 
+				  context:NULL];
 	}
 }
 
@@ -69,7 +72,9 @@
 						change:(NSDictionary *)change
 					   context:(void *)context
 {
-	if (object == self && [DHScatterGraph_getPropertyNames() containsObject:keyPath]) {
+	if (object == self
+		&& [DHScatterGraph_getPropertyNames() containsObject:keyPath]
+		&& ![change[NSKeyValueChangeOldKey] isEqual:change[NSKeyValueChangeNewKey]]) {
 		[self DH_SET_NEEDS_DISPLAY_METHOD];
 	}
 }
