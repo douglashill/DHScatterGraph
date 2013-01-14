@@ -94,6 +94,29 @@
 	[self setMultipleDataPoints:@[dataPoints]];
 }
 
+- (void)setMultipleDataPoints:(NSArray *)multipleDataPoints
+{
+	for (id object in multipleDataPoints) {
+		if (![object isKindOfClass:[NSArray class]]) {
+			[[NSException exceptionWithName:NSInvalidArgumentException
+									 reason:@"Object in multipleDataPoints is not a NSArray"
+								   userInfo:@{@"InvalidObject" : object}] raise];
+			return;
+		}
+		
+		for (id innerObject in object) {
+			if (![innerObject isKindOfClass:[NSValue class]]) {
+				[[NSException exceptionWithName:NSInvalidArgumentException
+										 reason:@"Object in array in multipleDataPoints is not a NSValue"
+									   userInfo:@{@"InvalidObject" : innerObject}] raise];
+				return;
+			}
+		}
+	}
+	
+	_multipleDataPoints = multipleDataPoints;
+}
+
 - (CGFloat)lineWidth
 {
 	if ([[self lineWidths] count]) {
@@ -107,6 +130,20 @@
 	[self setLineWidths:@[@(lineWidth)]];
 }
 
+- (void)setLineWidths:(NSArray *)lineWidths
+{
+	for (id object in lineWidths) {
+		if (![object isKindOfClass:[NSNumber class]]) {
+			[[NSException exceptionWithName:NSInvalidArgumentException
+									 reason:@"Object in lineWidths is not a NSNumber"
+								   userInfo:@{@"InvalidObject" : object}] raise];
+			return;
+		}
+	}
+	
+	_lineWidths = lineWidths;
+}
+
 - (DH_COLOUR_CLASS *)lineColour
 {
 	if ([[self lineColours] count]) {
@@ -118,6 +155,20 @@
 - (void)setLineColour:(DH_COLOUR_CLASS *)lineColour
 {
 	[self setLineColours:@[lineColour]];
+}
+
+- (void)setLineColours:(NSArray *)lineColours
+{
+	for (id object in lineColours) {
+		if (![object isKindOfClass:[DH_COLOUR_CLASS class]]) {
+			[[NSException exceptionWithName:NSInvalidArgumentException
+									 reason:@"Object in lineColours is not a DH_COLOUR_CLASS"
+								   userInfo:@{@"InvalidObject" : object}] raise];
+			return;
+		}
+	}
+	
+	_lineColours = lineColours;
 }
 
 
