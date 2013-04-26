@@ -1,7 +1,7 @@
 //
 //  DHScatterGraph.h
 //
-//  Douglas Hill, 13 January 2012
+//  Douglas Hill, 26 April 2013
 //  https://github.com/douglashill/DHScatterGraph
 //
 
@@ -26,6 +26,9 @@ typedef NSString *(^labelFormattingBlock)(CGFloat number);
 
 @property (nonatomic) CGFloat lineWidth; // Width in points for plotted lines. Default: 2
 @property (nonatomic, strong) NSArray *lineWidths; // Array of NSNumbers with floats. Widths of multiple plotted lines
+
+//@property (nonatomic) BOOL showsPointMarkers;
+@property (nonatomic, strong) NSArray *showsPointMarkersFlags; // Array of NSNumbers with BOOLs.
 
 @property (nonatomic, retain) DH_COLOUR_CLASS *lineColour; // Colour of first plotted line
 @property (nonatomic, strong) NSArray *lineColours; // Array of DH_COLOUR_CLASS objects. Colours for multiple plotted lines

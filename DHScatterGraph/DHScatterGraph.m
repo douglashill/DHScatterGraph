@@ -1,7 +1,7 @@
 //
 //  DHScatterGraph.m
 //
-//  Douglas Hill, 13 January 2012
+//  Douglas Hill, 26 April 2013
 //  https://github.com/douglashill/DHScatterGraph
 //
 
@@ -289,6 +289,17 @@
 		[lineColour setStroke];
 		
 		CGContextStrokePath(context);
+		
+		if ([[self showsPointMarkersFlags] count] <= idx) return;
+		NSNumber *obj = [self showsPointMarkersFlags][idx];
+		if ([obj boolValue] == NO) return;
+		[lineColour setFill];
+		for (NSValue *value in dataPoints) {
+			CGPoint point = [value DH_POINT_VALUE_METHOD];
+			point = CGPointApplyAffineTransform(point, transform);
+			CGFloat radius = 3;
+			CGContextFillEllipseInRect(context, CGRectMake(point.x - radius, point.y - radius, 2.0 * radius, 2.0 * radius));
+		}
 	}];
 	
 	
