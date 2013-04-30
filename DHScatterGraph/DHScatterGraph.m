@@ -1,12 +1,18 @@
 //
 //  DHScatterGraph.m
 //
-//  Douglas Hill, 26 April 2013
+//  Douglas Hill, 30 April 2013
 //  https://github.com/douglashill/DHScatterGraph
 //
 
 #import "DHScatterGraph.h"
 #import <objc/runtime.h>
+
+@interface DHScatterGraph ()
+
+@property (nonatomic, strong, readonly) NSArray *observedProperties; // Array of NSStrings containing the property names.
+
+@end
 
 @implementation DHScatterGraph
 {
@@ -17,6 +23,15 @@
 	
 	CGFloat xScale;
 	CGFloat yScale;
+	
+	NSArray *_observedProperties;
+}
+
+- (void)dealloc
+{
+	for (NSString *propertyName in [self observedProperties]) {
+		[self removeObserver:self forKeyPath:propertyName];
+	}
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -56,7 +71,7 @@
 	[self setGridColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.8, 1.0)]];
 	[self setGridStepSize:CGSizeMake(-1, -1)];
 	
-	for (NSString *propertyName in DHScatterGraph_getPropertyNames()) {
+	for (NSString *propertyName in [self observedProperties]) {
 		[self addObserver:self
 			   forKeyPath:propertyName
 				  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew 
@@ -73,7 +88,7 @@
 					   context:(void *)context
 {
 	if (object == self
-		&& [DHScatterGraph_getPropertyNames() containsObject:keyPath]
+		&& [[self observedProperties] containsObject:keyPath]
 		&& ![change[NSKeyValueChangeOldKey] isEqual:change[NSKeyValueChangeNewKey]]) {
 		[self DH_SET_NEEDS_DISPLAY_METHOD];
 	}
@@ -171,6 +186,25 @@
 	_lineColours = lineColours;
 }
 
+- (NSArray *)observedProperties
+{
+	if (_observedProperties) return _observedProperties;
+	
+	id DHScatterGraphClass = objc_getClass("DHScatterGraph");
+	unsigned int propertyCount = 0;
+	objc_property_t *properties = class_copyPropertyList(DHScatterGraphClass, &propertyCount);
+	NSMutableArray *array = [NSMutableArray arrayWithCapacity:propertyCount];
+	
+	for (int idx = 0; idx < propertyCount; idx++) {
+		const char *name = property_getName(properties[idx]);
+		[array addObject:[NSString stringWithCString:name encoding:NSASCIIStringEncoding]];
+	}
+	
+	free(properties);
+	_observedProperties = array;
+	return _observedProperties;
+}
+
 
 #pragma mark - Drawing
 
@@ -258,6 +292,8 @@
 	// Plot
 	
 	[[self multipleDataPoints] enumerateObjectsUsingBlock:^(NSArray *dataPoints, NSUInteger idx, BOOL *stop) {
+		if ([dataPoints count] == 0) return;
+		
 		CGPoint firstPoint = [dataPoints[0] DH_POINT_VALUE_METHOD];
 		firstPoint = CGPointApplyAffineTransform(firstPoint, transform);
 		CGContextMoveToPoint(context,
@@ -528,22 +564,6 @@
 
 
 #pragma mark - Functions
-
-NSArray *DHScatterGraph_getPropertyNames(void)
-{
-	id DHScatterGraphClass = objc_getClass("DHScatterGraph");
-	unsigned int propertyCount = 0;
-	objc_property_t *properties = class_copyPropertyList(DHScatterGraphClass, &propertyCount);
-	NSMutableArray *array = [NSMutableArray arrayWithCapacity:propertyCount];
-	
-	for (int idx = 0; idx < propertyCount; idx++) {
-		const char *name = property_getName(properties[idx]);
-		[array addObject:[NSString stringWithCString:name encoding:NSASCIIStringEncoding]];
-	}
-	
-	free(properties);
-	return array;
-}
 
 CGFloat automaticStep(CGFloat dataRange, CGFloat screenPoints)
 {
