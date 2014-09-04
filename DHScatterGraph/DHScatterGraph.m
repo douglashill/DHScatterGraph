@@ -8,6 +8,44 @@
 #import "DHScatterGraph.h"
 #import <objc/runtime.h>
 
+#if TARGET_OS_IPHONE
+
+#define DH_CONTENT_MODE_CONFIGURATION 
+
+#define DH_GREYSCALE_COLOUR_METHOD(WHITE, ALPHA) colorWithWhite:WHITE alpha:ALPHA
+
+#define DH_CGCONTEXT_CREATE UIGraphicsGetCurrentContext()
+
+#define DH_SET_NEEDS_DISPLAY_METHOD setNeedsDisplay
+
+#define DH_STRING_SIZE_METHOD(FONT) sizeWithFont:FONT
+#define DH_STRING_DRAW_METHOD(RECT, FONT) drawInRect:RECT withFont:FONT
+
+#define DH_POINT_VALUE_METHOD CGPointValue
+
+#define DH_Y_POSITIVE - 1.0
+#define DH_TRANSFORM_FOR_LOWER_LEFT_ORIGIN(HEIGHT) CGAffineTransformScale(CGAffineTransformMakeTranslation(0.0, HEIGHT), 1.0, -1.0);
+
+#else
+
+#define DH_CONTENT_MODE_CONFIGURATION
+
+#define DH_GREYSCALE_COLOUR_METHOD(WHITE, ALPHA) colorWithDeviceWhite:WHITE alpha:ALPHA
+
+#define DH_CGCONTEXT_CREATE [[NSGraphicsContext currentContext] graphicsPort]
+
+#define DH_SET_NEEDS_DISPLAY_METHOD setNeedsDisplay:YES
+
+#define DH_STRING_SIZE_METHOD(FONT) sizeWithAttributes:@{NSFontAttributeName : FONT}
+#define DH_STRING_DRAW_METHOD(RECT, FONT) drawInRect:RECT withAttributes:@{NSFontAttributeName : FONT}
+
+#define DH_POINT_VALUE_METHOD pointValue
+
+#define DH_Y_POSITIVE 1.0
+#define DH_TRANSFORM_FOR_LOWER_LEFT_ORIGIN(HEIGHT) CGAffineTransformIdentity
+
+#endif
+
 @interface DHScatterGraph ()
 
 @property (nonatomic, strong, readonly) NSArray *observedProperties; // Array of NSStrings containing the property names.
@@ -52,7 +90,9 @@
 
 - (void)initialise
 {
-	DH_CONTENT_MODE_CONFIGURATION;
+#if TARGET_OS_IPHONE
+	[self setContentMode:UIViewContentModeRedraw];
+#endif
 	
 	[self setPaddingFraction:CGSizeMake(0.1, 0.1)];
 	

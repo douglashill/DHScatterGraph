@@ -5,7 +5,25 @@
 //  https://github.com/douglashill/DHScatterGraph
 //
 
-#import "DHScatterGraphDefinitions.h"
+#import <TargetConditionals.h>
+
+#if TARGET_OS_IPHONE
+
+#import <UIKit/UIKit.h>
+
+#define DH_VIEW_CLASS UIView
+#define DH_COLOUR_CLASS UIColor
+#define DH_FONT_CLASS UIFont
+
+#else
+
+#import <AppKit/AppKit.h>
+
+#define DH_VIEW_CLASS NSView
+#define DH_COLOUR_CLASS NSColor
+#define DH_FONT_CLASS NSFont
+
+#endif
 
 typedef NSString *(^labelFormattingBlock)(CGFloat number);
 
