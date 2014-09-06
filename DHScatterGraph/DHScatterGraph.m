@@ -6,8 +6,6 @@
 
 #if TARGET_OS_IPHONE
 
-#define DH_CONTENT_MODE_CONFIGURATION 
-
 #define DH_GREYSCALE_COLOUR_METHOD(WHITE, ALPHA) colorWithWhite:WHITE alpha:ALPHA
 
 #define DH_CGCONTEXT_CREATE UIGraphicsGetCurrentContext()
@@ -20,8 +18,6 @@
 #define DH_TRANSFORM_FOR_LOWER_LEFT_ORIGIN(HEIGHT) CGAffineTransformScale(CGAffineTransformMakeTranslation(0.0, HEIGHT), 1.0, -1.0);
 
 #else
-
-#define DH_CONTENT_MODE_CONFIGURATION
 
 #define DH_GREYSCALE_COLOUR_METHOD(WHITE, ALPHA) colorWithDeviceWhite:WHITE alpha:ALPHA
 
