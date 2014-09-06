@@ -1,15 +1,11 @@
-//
-//  DHScatterGraph.h
-//
-//  Douglas Hill, 26 April 2013
+//  Douglas Hill, September 2014
 //  https://github.com/douglashill/DHScatterGraph
-//
 
 #import <TargetConditionals.h>
 
 #if TARGET_OS_IPHONE
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #define DH_VIEW_CLASS UIView
 #define DH_COLOUR_CLASS UIColor
@@ -17,7 +13,7 @@
 
 #else
 
-#import <AppKit/AppKit.h>
+@import AppKit;
 
 #define DH_VIEW_CLASS NSView
 #define DH_COLOUR_CLASS NSColor

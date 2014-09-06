@@ -1,13 +1,11 @@
-//
-//  ScatterViewController.h
-//  DHScatterGraph iOS example
-//
-//  Douglas Hill, 5 January 2012
+//  Douglas Hill, September 2014
 //  https://github.com/douglashill/DHScatterGraph
-//
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface ScatterViewController : UIViewController
+
+/// Designated initialiser
+- (instancetype)init __attribute((objc_designated_initializer));
 
 @end

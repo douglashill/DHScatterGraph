@@ -1,13 +1,7 @@
-//
-//  main.m
-//  DHScatterGraph iOS example
-//
-//  Douglas Hill, 5 January 2012
+//  Douglas Hill, September 2014
 //  https://github.com/douglashill/DHScatterGraph
-//
 
-#import <UIKit/UIKit.h>
-
+@import UIKit;
 #import "ScatterAppDelegate.h"
 
 int main(int argc, char *argv[])

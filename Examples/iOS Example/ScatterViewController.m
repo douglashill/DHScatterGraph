@@ -1,25 +1,26 @@
-//
-//  ScatterViewController.m
-//  DHScatterGraph iOS example
-//
-//  Douglas Hill, 5 January 2012
+//  Douglas Hill, September 2014
 //  https://github.com/douglashill/DHScatterGraph
-//
 
 #import "ScatterViewController.h"
+
 #import "DHScatterGraph.h"
-
-@interface ScatterViewController ()
-
-@property (nonatomic, weak) DHScatterGraph *scatterGraph;
-
-@end
 
 @implementation ScatterViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+	return [self init];
+}
+
+- (instancetype)init
+{
+	self = [super initWithNibName:nil bundle:nil];
+	return self;
+}
+
 - (void)loadView
 {
-	DHScatterGraph *scatterGraph = [[DHScatterGraph alloc] init];
+	DHScatterGraph *const scatterGraph = [[DHScatterGraph alloc] init];
 	
 	// Generate random points to plot
 	NSUInteger numberOfPoints = 21;
@@ -32,7 +33,6 @@
 	[scatterGraph setDataPoints:dataPoints];
 	
 	[self setView:scatterGraph];
-	[self setScatterGraph:scatterGraph];
 }
 
 @end

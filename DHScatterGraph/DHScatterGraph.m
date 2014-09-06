@@ -1,9 +1,5 @@
-//
-//  DHScatterGraph.m
-//
-//  Douglas Hill, 30 April 2013
+//  Douglas Hill, September 2014
 //  https://github.com/douglashill/DHScatterGraph
-//
 
 #import "DHScatterGraph.h"
 #import <objc/runtime.h>
