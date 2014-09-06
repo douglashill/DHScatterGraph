@@ -311,7 +311,7 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 	}
 	
 	// Axes
-	[self drawAxesInContent:context withTransform:transform];	
+	[self drawAxesInContext:context withTransform:transform];	
 	
 	
 	// Plot
@@ -466,7 +466,7 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 	maxY += verticalPadding;
 }
 
-- (void)drawAxesInContent:(CGContextRef)context
+- (void)drawAxesInContext:(CGContextRef)context
 			withTransform:(CGAffineTransform)transform
 {
 	CGFloat axesWidth = [self axesWidth];
