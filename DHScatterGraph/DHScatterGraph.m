@@ -32,6 +32,8 @@
 
 #endif
 
+static void *const displayPropertiesObservationContext = (void *)&displayPropertiesObservationContext;
+
 @interface DHScatterGraph ()
 
 @property (nonatomic, strong, readonly) NSArray *observedProperties; // Array of NSStrings containing the property names.
@@ -54,7 +56,7 @@
 - (void)dealloc
 {
 	for (NSString *propertyName in [self observedProperties]) {
-		[self removeObserver:self forKeyPath:propertyName];
+		[self removeObserver:self forKeyPath:propertyName context:displayPropertiesObservationContext];
 	}
 }
 
@@ -99,7 +101,7 @@
 		[self addObserver:self
 			   forKeyPath:propertyName
 				  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew 
-				  context:NULL];
+				  context:displayPropertiesObservationContext];
 	}
 }
 
@@ -111,8 +113,7 @@
 						change:(NSDictionary *)change
 					   context:(void *)context
 {
-	if (object == self
-		&& [[self observedProperties] containsObject:keyPath]
+	if (context == displayPropertiesObservationContext
 		&& ![change[NSKeyValueChangeOldKey] isEqual:change[NSKeyValueChangeNewKey]]) {
 		[self DH_SET_NEEDS_DISPLAY_METHOD];
 	}
