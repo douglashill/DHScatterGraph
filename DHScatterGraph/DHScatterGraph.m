@@ -14,9 +14,6 @@
 
 #define DH_SET_NEEDS_DISPLAY_METHOD setNeedsDisplay
 
-#define DH_STRING_SIZE_METHOD(FONT) sizeWithFont:FONT
-#define DH_STRING_DRAW_METHOD(RECT, FONT) drawInRect:RECT withFont:FONT
-
 #define DH_POINT_VALUE_METHOD CGPointValue
 
 #define DH_Y_POSITIVE - 1.0
@@ -31,9 +28,6 @@
 #define DH_CGCONTEXT_CREATE [[NSGraphicsContext currentContext] graphicsPort]
 
 #define DH_SET_NEEDS_DISPLAY_METHOD setNeedsDisplay:YES
-
-#define DH_STRING_SIZE_METHOD(FONT) sizeWithAttributes:@{NSFontAttributeName : FONT}
-#define DH_STRING_DRAW_METHOD(RECT, FONT) drawInRect:RECT withAttributes:@{NSFontAttributeName : FONT}
 
 #define DH_POINT_VALUE_METHOD pointValue
 
@@ -96,8 +90,6 @@
 	[self setNegativeQuadrantColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.91, 1.0)]];
 	
 	[self setValueLabelStepSize:CGSizeMake(-1, -1)];
-	[self setValueLabelFont:[DH_FONT_CLASS systemFontOfSize:14]];
-	[self setValueLabelColour:[DH_COLOUR_CLASS blackColor]];
 	[self setShowValueLabelsAtOrigin:NO];
 	
 	[self setAxesWidth:1.0];
@@ -376,8 +368,6 @@
 	
 	
 	// Add values along axes
-	
-	[[self valueLabelColour] setFill];
 		
 	CGFloat edgeFudge = 0.2;
 	CGSize labelStep = [self valueLabelStepSize];
@@ -411,16 +401,18 @@
 
 	}
 	
+	CGSize const valueLabelOffset = [@"m" sizeWithAttributes:[self valueLabelAttributes]];
+	
 	for (CGFloat num = labelStep.width * ceilf(minX / labelStep.width + edgeFudge); num < maxX; num += labelStep.width) {
 		if (num == 0.0 && ![self shouldShowValueLabelsAtOrigin])
 			continue;
 		
 		NSString *text = [self xAxisText:num];
 		CGRect textRect;
-		textRect.size = [text DH_STRING_SIZE_METHOD([self valueLabelFont])];
+		textRect.size = [text sizeWithAttributes:[self valueLabelAttributes]];
 		CGPoint textTopCentre = CGPointApplyAffineTransform(CGPointMake(num, 0), transform);
 		textRect.origin.x = textTopCentre.x - textRect.size.width / 2.0;
-		CGFloat offset = DH_Y_POSITIVE * 0.6 * [[self valueLabelFont] pointSize] + (DH_Y_POSITIVE == 1.0 ? textRect.size.height : 0);
+		CGFloat offset = DH_Y_POSITIVE * 0.5 * valueLabelOffset.height + (DH_Y_POSITIVE == 1.0 ? textRect.size.height : 0);
 		textRect.origin.y = textTopCentre.y - offset;
 		
 		// Ensure text is fully within bounds
@@ -430,7 +422,7 @@
 			textRect.origin.y = MIN(textRect.origin.y, [self bounds].size.height - textRect.size.height);
 		}
 		
-		[text DH_STRING_DRAW_METHOD(textRect, [self valueLabelFont])];
+		[text drawInRect:textRect withAttributes:[self valueLabelAttributes]];
 	}
 	
 	for (CGFloat num = labelStep.height * ceilf(minY / labelStep.height + edgeFudge); num < maxY; num += labelStep.height) {
@@ -439,12 +431,12 @@
 		
 		NSString *text = [self yAxisText:num];
 		CGRect textRect;
-		textRect.size = [text DH_STRING_SIZE_METHOD([self valueLabelFont])];
+		textRect.size = [text sizeWithAttributes:[self valueLabelAttributes]];
 		CGPoint textCentreRight = CGPointApplyAffineTransform(CGPointMake(0, num), transform);
-		textRect.origin.x = textCentreRight.x - textRect.size.width - 0.8 * [[self valueLabelFont] pointSize];
+		textRect.origin.x = textCentreRight.x - textRect.size.width - valueLabelOffset.width;
 		textRect.origin.x = MAX(textRect.origin.x, 0.0); // Ensure text is fully within bounds
 		textRect.origin.y = textCentreRight.y - textRect.size.height / 2.0;
-		[text DH_STRING_DRAW_METHOD(textRect, [self valueLabelFont])];
+		[text drawInRect:textRect withAttributes:[self valueLabelAttributes]];
 	}
 }
 
@@ -572,29 +564,29 @@
 // Approximate maximum widths and heights using labels at extrema
 - (CGFloat)xAxisMaxLabelWidth
 {
-	CGSize sizeOfMaxLabel = [[self xAxisText:maxX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
-	CGSize sizeOfMinLabel = [[self xAxisText:minX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+	CGSize sizeOfMaxLabel = [[self xAxisText:maxX] sizeWithAttributes:[self valueLabelAttributes]];
+	CGSize sizeOfMinLabel = [[self xAxisText:minX] sizeWithAttributes:[self valueLabelAttributes]];
 	return MAX(sizeOfMaxLabel.width, sizeOfMinLabel.width);
 }
 
 - (CGFloat)xAxisMaxLabelHeight
 {
-	CGSize sizeOfMaxLabel = [[self xAxisText:maxX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
-	CGSize sizeOfMinLabel = [[self xAxisText:minX] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+	CGSize sizeOfMaxLabel = [[self xAxisText:maxX] sizeWithAttributes:[self valueLabelAttributes]];
+	CGSize sizeOfMinLabel = [[self xAxisText:minX] sizeWithAttributes:[self valueLabelAttributes]];
 	return MAX(sizeOfMaxLabel.height, sizeOfMinLabel.height);
 }
 
 - (CGFloat)yAxisMaxLabelWidth
 {
-	CGSize sizeOfMaxLabel = [[self yAxisText:maxY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
-	CGSize sizeOfMinLabel = [[self yAxisText:minY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+	CGSize sizeOfMaxLabel = [[self yAxisText:maxY] sizeWithAttributes:[self valueLabelAttributes]];
+	CGSize sizeOfMinLabel = [[self yAxisText:minY] sizeWithAttributes:[self valueLabelAttributes]];
 	return MAX(sizeOfMaxLabel.width, sizeOfMinLabel.width);
 }
 
 - (CGFloat)yAxisMaxLabelHeight
 {
-	CGSize sizeOfMaxLabel = [[self yAxisText:maxY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
-	CGSize sizeOfMinLabel = [[self yAxisText:minY] DH_STRING_SIZE_METHOD([self valueLabelFont])];
+	CGSize sizeOfMaxLabel = [[self yAxisText:maxY] sizeWithAttributes:[self valueLabelAttributes]];
+	CGSize sizeOfMinLabel = [[self yAxisText:minY] sizeWithAttributes:[self valueLabelAttributes]];
 	return MAX(sizeOfMaxLabel.height, sizeOfMinLabel.height);
 }
 

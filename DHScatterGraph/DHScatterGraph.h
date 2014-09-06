@@ -48,8 +48,7 @@ typedef NSString *(^labelFormattingBlock)(CGFloat number);
 @property (nonatomic, strong) NSArray *lineColours; // Array of DH_COLOUR_CLASS objects. Colours for multiple plotted lines
 
 @property (nonatomic) CGSize valueLabelStepSize; // Step between value labels along the axes. Set to any negative value for automatic.
-@property (nonatomic, retain) DH_FONT_CLASS *valueLabelFont; // Typeface and size for value labels
-@property (nonatomic, retain) DH_COLOUR_CLASS *valueLabelColour; // Colour of value labels
+@property (nonatomic, strong) NSDictionary *valueLabelAttributes; // Drawing attributes for value labels. See NSAttributedString AppKit/UIKit additions.
 @property (nonatomic, getter = shouldShowValueLabelsAtOrigin) BOOL showValueLabelsAtOrigin; // Show or hide the labels for (0, 0), which are drawn on top of the axes
 @property (nonatomic, copy) labelFormattingBlock xFormattingBlock; // Block that takes a CGFloat parameter and returns a string to be used as a label
 @property (nonatomic, copy) labelFormattingBlock yFormattingBlock;
