@@ -283,10 +283,10 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 		
 		gridStep = [self gridStepSize];
 		if (gridStep.width < 0) {
-			gridStep.width = automaticStep(maxX - minX, [self bounds].size.width);
+			gridStep.width = automaticStep(maxX - minX, [self bounds].size.width, 20);
 		}
 		if (gridStep.height < 0) {
-			gridStep.height = automaticStep(maxY - minY, [self bounds].size.height);
+			gridStep.height = automaticStep(maxY - minY, [self bounds].size.height, 20);
 		}
 		
 		// Vertical grid lines
@@ -369,7 +369,7 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 	CGFloat edgeFudge = 0.2;
 	CGSize labelStep = [self valueLabelStepSize];
 	if (labelStep.width <= 0) {
-		labelStep.width = gridStep.width;
+		labelStep.width = automaticStep(maxX - minX, [self bounds].size.width, 50);
 		CGFloat maxLabelWidth = [self xAxisMaxLabelWidth] / xScale;
 		// Multiple of 1, 2, 5, 10 etc. of grid step
 		while (labelStep.width < maxLabelWidth) {
@@ -383,7 +383,7 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 		}
 	}
 	if (labelStep.height <= 0) {
-		labelStep.height = gridStep.height;
+		labelStep.height = automaticStep(maxY - minY, [self bounds].size.height, 50);
 		CGFloat maxLabelHeight = [self yAxisMaxLabelHeight] / yScale;
 		// Multiple of 1, 2, 5, 10 etc. of grid step
 		while (labelStep.height < maxLabelHeight) {
@@ -590,9 +590,9 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 
 #pragma mark - Functions
 
-CGFloat automaticStep(CGFloat dataRange, CGFloat screenPoints)
+CGFloat automaticStep(CGFloat dataRange, CGFloat screenPoints, CGFloat guide)
 {
-	CGFloat numberOfDivisions = screenPoints / 50.0;
+	CGFloat numberOfDivisions = screenPoints / guide;
 	CGFloat target = dataRange / numberOfDivisions;
 	CGFloat magnitude = powf(10, floorf(log10f(target)));
 	
