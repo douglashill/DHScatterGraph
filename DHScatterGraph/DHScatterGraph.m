@@ -235,6 +235,10 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 
 - (void)drawRect:(CGRect)rect
 {
+	if ([self hasDataPoints] == NO) {
+		return;
+	}
+	
 	[self calculateExtrema];
 	
 	CGContextRef context = DH_CGCONTEXT_CREATE;
@@ -439,6 +443,16 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 
 
 #pragma mark - Helpers
+
+- (BOOL)hasDataPoints
+{
+	for (NSArray *dataPoints in [self multipleDataPoints]) {
+		if ([dataPoints  count]) {
+			return YES;
+		}
+	}
+	return NO;
+}
 
 - (void)calculateExtrema
 {
