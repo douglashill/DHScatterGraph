@@ -127,7 +127,7 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 	objc_property_t *properties = class_copyPropertyList(DHScatterGraphClass, &propertyCount);
 	NSMutableArray *array = [NSMutableArray arrayWithCapacity:propertyCount];
 	
-	for (int idx = 0; idx < propertyCount; idx++) {
+	for (unsigned int idx = 0; idx < propertyCount; ++idx) {
 		const char *name = property_getName(properties[idx]);
 		[array addObject:[NSString stringWithCString:name encoding:NSASCIIStringEncoding]];
 	}
@@ -506,7 +506,7 @@ CGFloat automaticStep(CGFloat dataRange, CGFloat screenPoints, CGFloat guide)
 	CGFloat smallestDifference = CGFLOAT_MAX;
 	int indexOfClosestMultiplier = 0;
 	
-	for (int index = 0; index < count; index++) {
+	for (int index = 0; index < count; ++index) {
 		CGFloat difference = ABS(multipliers[index] * magnitude - target);
 		if (difference < smallestDifference) {
 			smallestDifference = difference;
