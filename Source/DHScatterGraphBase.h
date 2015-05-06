@@ -1,7 +1,7 @@
 //  Douglas Hill, May 2015
 //  https://github.com/douglashill/DHScatterGraph
 
-#import <TargetConditionals.h>
+@import Darwin.TargetConditionals;
 
 #if TARGET_OS_IPHONE
 

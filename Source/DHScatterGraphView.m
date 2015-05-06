@@ -5,7 +5,7 @@
 
 #import "DHScatterGraphLineAttributes.h"
 #import "DHScatterGraphPointSet.h"
-#import <objc/runtime.h>
+@import ObjectiveC.runtime;
 
 #if TARGET_OS_IPHONE
 
