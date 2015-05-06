@@ -232,10 +232,10 @@ static void initialiseScatterGraph(DHScatterGraph *self)
 	
 	// Plot
 	
-	[[self pointSets] enumerateObjectsUsingBlock:^(DHScatterGraphPointSet *pointSet, NSUInteger idx, BOOL *stop) {
+	for (DHScatterGraphPointSet *pointSet in [self pointSets]) {
 		NSArray *const dataPoints = [pointSet dataPoints];
 	 
-		if ([dataPoints count] == 0) return;
+		if ([dataPoints count] == 0) continue;
 		
 		CGPoint firstPoint = [dataPoints[0] DH_POINT_VALUE_METHOD];
 		firstPoint = CGPointApplyAffineTransform(firstPoint, transform);
@@ -258,7 +258,7 @@ static void initialiseScatterGraph(DHScatterGraph *self)
 		
 		CGContextStrokePath(context);
 		
-		if ([pointSet showsPointMarkers] == NO) return;
+		if ([pointSet showsPointMarkers] == NO) continue;
 		[[pointSet colour] setFill];
 		for (NSValue *value in dataPoints) {
 			CGPoint point = [value DH_POINT_VALUE_METHOD];
@@ -266,7 +266,7 @@ static void initialiseScatterGraph(DHScatterGraph *self)
 			CGFloat radius = 3;
 			CGContextFillEllipseInRect(context, CGRectMake(point.x - radius, point.y - radius, 2.0 * radius, 2.0 * radius));
 		}
-	}];
+	};
 	
 	
 	// Add values along axes
