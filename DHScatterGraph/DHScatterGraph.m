@@ -62,7 +62,7 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 	}
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
 	if (self = [super initWithFrame:frame]) {
 		[self initialise];
@@ -70,7 +70,7 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 	return self;
 }
 
-- (id)initWithCoder:(NSCoder *)decoder
+- (instancetype)initWithCoder:(NSCoder *)decoder
 {
 	if (self = [super initWithCoder:decoder]) {
 		[self initialise];
