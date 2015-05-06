@@ -1,7 +1,7 @@
 //  Douglas Hill, September 2014
 //  https://github.com/douglashill/DHScatterGraph
 
-#import "DHScatterGraph.h"
+#import "DHScatterGraphView.h"
 
 #import "DHScatterGraphPointSet.h"
 #import <objc/runtime.h>
@@ -36,13 +36,13 @@
 
 static void *const displayPropertiesObservationContext = (void *)&displayPropertiesObservationContext;
 
-@interface DHScatterGraph ()
+@interface DHScatterGraphView ()
 
 @property (nonatomic, strong, readonly) NSArray *observedProperties; // Array of NSStrings containing the property names.
 
 @end
 
-@implementation DHScatterGraph
+@implementation DHScatterGraphView
 {
 	CGFloat minX;
 	CGFloat maxX;
@@ -78,7 +78,7 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 	return self;
 }
 
-static void initialiseScatterGraph(DHScatterGraph *self)
+static void initialiseScatterGraph(DHScatterGraphView *self)
 {
 #if TARGET_OS_IPHONE
 	[self setContentMode:UIViewContentModeRedraw];

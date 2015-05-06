@@ -22,7 +22,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="507" height="413"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="eRV-O9-2Dv" customClass="DHScatterGraph">
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="eRV-O9-2Dv" customClass="DHScatterGraphView">
                         <rect key="frame" x="0.0" y="0.0" width="507" height="413"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </customView>

@@ -3,7 +3,7 @@
 
 #import "ScatterViewController.h"
 
-#import "DHScatterGraph.h"
+#import "DHScatterGraphView.h"
 #import "DHScatterGraphPointSet.h"
 
 @implementation ScatterViewController
@@ -21,7 +21,7 @@
 
 - (void)loadView
 {
-	DHScatterGraph *const scatterGraph = [[DHScatterGraph alloc] init];
+	DHScatterGraphView *const scatterGraph = [[DHScatterGraphView alloc] init];
 	
 	// Generate random points to plot
 	NSUInteger numberOfPoints = 21;

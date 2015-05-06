@@ -5,7 +5,7 @@
 
 typedef NSString *(^labelFormattingBlock)(CGFloat number);
 
-@interface DHScatterGraph : DH_VIEW_CLASS
+@interface DHScatterGraphView : DH_VIEW_CLASS
 
 @property (nonatomic, strong) NSArray *pointSets;
 

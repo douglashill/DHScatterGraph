@@ -3,13 +3,13 @@
 
 #import "Document.h"
 
-#import "DHScatterGraph.h"
+#import "DHScatterGraphView.h"
 #import "DHScatterGraphPointSet.h"
 
 @interface Document ()
 
 @property (strong) NSArray *dataPoints;
-@property (weak) IBOutlet DHScatterGraph *scatterGraph;
+@property (weak) IBOutlet DHScatterGraphView *scatterGraph;
 
 @end
 
