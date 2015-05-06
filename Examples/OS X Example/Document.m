@@ -48,7 +48,7 @@
 {
 	[super windowControllerDidLoadNib:windowController];
 	
-	[[self scatterGraph] setPointSets:@[[DHScatterGraphPointSet pointSetWithDataPoints:[self dataPoints] colour:[NSColor darkGrayColor] lineWidth:2 showsPointMarkers:YES]]];
+	[[self scatterGraph] setPointSets:@[[DHScatterGraphPointSet pointSetWithDataPoints:[self dataPoints] lineAttributes:[DHScatterGraphLineAttributes lineAttributesWithColour:[NSColor darkGrayColor] width:2] showsPointMarkers:YES]]];
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError

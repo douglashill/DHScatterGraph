@@ -3,6 +3,8 @@
 
 #import "DHScatterGraphBase.h"
 
+@class DHScatterGraphLineAttributes;
+
 typedef NSString *(^labelFormattingBlock)(CGFloat number);
 
 @interface DHScatterGraphView : DH_VIEW_CLASS
@@ -25,11 +27,11 @@ typedef NSString *(^labelFormattingBlock)(CGFloat number);
 @property (nonatomic, copy) labelFormattingBlock xFormattingBlock; // Block that takes a CGFloat parameter and returns a string to be used as a label
 @property (nonatomic, copy) labelFormattingBlock yFormattingBlock;
 
-@property (nonatomic) CGFloat axesWidth; // Thickness of lines for axes
-@property (nonatomic, retain) DH_COLOUR_CLASS *axesColour; // Colour of axes
+/// The attributes used to draw the x and y axes. The default is a 0.4 grey and a width of 1 point.
+@property (nonatomic, strong) DHScatterGraphLineAttributes *axesAttributes;
 
-@property (nonatomic) CGFloat gridWidth; // Thickness of lines for grid
-@property (nonatomic, retain) DH_COLOUR_CLASS *gridColour; // Colour of grid
+/// The attributes used to draw the grid lines. The default is a 0.8 grey and a width of 1 point.
+@property (nonatomic, strong) DHScatterGraphLineAttributes *gridAttributes;
 @property (nonatomic) CGSize gridStepSize; // Step between grid lines. Set to any negative value for automatic.
 
 @end

@@ -3,31 +3,32 @@
 
 #import "DHScatterGraphPointSet.h"
 
+#import "DHScatterGraphLineAttributes.h"
+
 @implementation DHScatterGraphPointSet
 
 + (instancetype)pointSetWithDataPoints:(NSArray *)dataPoints
 {
-	return [self pointSetWithDataPoints:dataPoints colour:nil lineWidth:0 showsPointMarkers:YES];
+	return [self pointSetWithDataPoints:dataPoints lineAttributes:[DHScatterGraphLineAttributes lineAttributesWithColour:[DH_COLOUR_CLASS darkGrayColor] width:0] showsPointMarkers:YES];
 }
 
-+ (instancetype)pointSetWithDataPoints:(NSArray *)dataPoints colour:(DH_COLOUR_CLASS *)colour lineWidth:(CGFloat)lineWidth showsPointMarkers:(BOOL)showsPointMarkers
++ (instancetype)pointSetWithDataPoints:(NSArray *)dataPoints lineAttributes:(DHScatterGraphLineAttributes *)lineAttributes showsPointMarkers:(BOOL)showsPointMarkers
 {
-	return [[self alloc] initWithDataPoints:dataPoints colour:colour lineWidth:lineWidth showsPointMarkers:showsPointMarkers];
+	return [[self alloc] initWithDataPoints:dataPoints lineAttributes:lineAttributes showsPointMarkers:showsPointMarkers];
 }
 
 - (instancetype)init
 {
-	return [self initWithDataPoints:nil colour:nil lineWidth:0 showsPointMarkers:NO];
+	return [self initWithDataPoints:nil lineAttributes:nil showsPointMarkers:NO];
 }
 
-- (instancetype)initWithDataPoints:(NSArray *)dataPoints colour:(DH_COLOUR_CLASS *)colour lineWidth:(CGFloat)lineWidth showsPointMarkers:(BOOL)showsPointMarkers
+- (instancetype)initWithDataPoints:(NSArray *)dataPoints lineAttributes:(DHScatterGraphLineAttributes *)lineAttributes showsPointMarkers:(BOOL)showsPointMarkers
 {
 	self = [super init];
 	if (self == nil) return nil;
 	
 	_dataPoints = [dataPoints copy];
-	_colour = colour;
-	_lineWidth = lineWidth;
+	_lineAttributes = lineAttributes;
 	_showsPointMarkers = showsPointMarkers;
 	
 	return self;

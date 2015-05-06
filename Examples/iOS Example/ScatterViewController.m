@@ -30,7 +30,7 @@
 		[dataPoints addObject:[NSValue valueWithCGPoint:point]];
 	}
 	
-	[scatterGraph setPointSets:@[[DHScatterGraphPointSet pointSetWithDataPoints:dataPoints colour:[UIColor darkGrayColor] lineWidth:2 showsPointMarkers:YES]]];
+	[scatterGraph setPointSets:@[[DHScatterGraphPointSet pointSetWithDataPoints:dataPoints lineAttributes:[DHScatterGraphLineAttributes lineAttributesWithColour:[UIColor darkGrayColor] width:2] showsPointMarkers:YES]]];
 	
 	[self setView:scatterGraph];
 }

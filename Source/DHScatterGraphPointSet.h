@@ -3,24 +3,23 @@
 
 #import "DHScatterGraphBase.h"
 
+@class DHScatterGraphLineAttributes;
+
 @interface DHScatterGraphPointSet : NSObject
 
-/// Shows point markers with no line
+/// Dark grey, no line, shows point markers.
 + (instancetype)pointSetWithDataPoints:(NSArray *)dataPoints;
 
-+ (instancetype)pointSetWithDataPoints:(NSArray *)dataPoints colour:(DH_COLOUR_CLASS *)colour lineWidth:(CGFloat)lineWidth showsPointMarkers:(BOOL)showsPointMarkers;
++ (instancetype)pointSetWithDataPoints:(NSArray *)dataPoints lineAttributes:(DHScatterGraphLineAttributes *)lineAttributes showsPointMarkers:(BOOL)showsPointMarkers;
 
 /// Designated initialiser
-- (instancetype)initWithDataPoints:(NSArray *)dataPoints colour:(DH_COLOUR_CLASS *)colour lineWidth:(CGFloat)lineWidth showsPointMarkers:(BOOL)showsPointMarkers __attribute((objc_designated_initializer));
+- (instancetype)initWithDataPoints:(NSArray *)dataPoints lineAttributes:(DHScatterGraphLineAttributes *)lineAttributes showsPointMarkers:(BOOL)showsPointMarkers __attribute((objc_designated_initializer));
 
-/// Ordered CGPoints in NSValues. Default: no data
+/// Ordered CGPoints in NSValues.
 @property (nonatomic, copy, readonly) NSArray *dataPoints;
 
-/// Colour of plotted line
-@property (nonatomic, strong, readonly) DH_COLOUR_CLASS *colour;
-
-/// Width in points for plotted lines. Default: 2
-@property (nonatomic, readonly) CGFloat lineWidth;
+/// The attributes of the line to be plotted between the points. Use a width of 0 if there should be no line. The colour is also used for point markers.
+@property (nonatomic, strong, readonly) DHScatterGraphLineAttributes *lineAttributes;
 
 @property (nonatomic, readonly) BOOL showsPointMarkers;
 

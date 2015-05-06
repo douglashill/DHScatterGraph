@@ -3,6 +3,7 @@
 
 #import "DHScatterGraphView.h"
 
+#import "DHScatterGraphLineAttributes.h"
 #import "DHScatterGraphPointSet.h"
 #import <objc/runtime.h>
 
@@ -88,11 +89,9 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 	[self setValueLabelStepSize:CGSizeMake(-1, -1)];
 	[self setShowValueLabelsAtOrigin:NO];
 	
-	[self setAxesWidth:1.0];
-	[self setAxesColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.4, 1.0)]];
+	[self setAxesAttributes:[DHScatterGraphLineAttributes lineAttributesWithColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.4, 1.0)] width:1]];
 	
-	[self setGridWidth:1.0];
-	[self setGridColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.8, 1.0)]];
+	[self setGridAttributes:[DHScatterGraphLineAttributes lineAttributesWithColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.8, 1.0)] width:1]];
 	[self setGridStepSize:CGSizeMake(-1, -1)];
 	
 	for (NSString *propertyName in [self observedProperties]) {
@@ -190,7 +189,7 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 	// Grid lines
 	CGSize gridStep; // The actual step size used, resolved automatically if necessary
 	{
-		CGFloat lineWidth = [self gridWidth];
+		CGFloat const lineWidth = [[self gridAttributes] width];
 		CGFloat edgeFudge = 0.1;
 		
 		gridStep = [self gridStepSize];
@@ -217,8 +216,7 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 							   withTransform:transform];
 		}
 		
-		[[self gridColour] setStroke];
-		CGContextSetLineWidth(context, [self gridWidth]);
+		[[self gridAttributes] set];
 		CGContextStrokePath(context);
 	}
 	
@@ -248,14 +246,11 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 		}
 		
 		CGContextSetLineJoin(context, kCGLineJoinBevel);
-		CGContextSetLineWidth(context, [pointSet lineWidth]);
-		
-		[[pointSet colour] setStroke];
+		[[pointSet lineAttributes] set];
 		
 		CGContextStrokePath(context);
 		
 		if ([pointSet showsPointMarkers] == NO) continue;
-		[[pointSet colour] setFill];
 		for (NSValue *value in dataPoints) {
 			CGPoint point = [value DH_POINT_VALUE_METHOD];
 			point = CGPointApplyAffineTransform(point, transform);
@@ -380,7 +375,7 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 - (void)drawAxesInContext:(CGContextRef)context
 			withTransform:(CGAffineTransform)transform
 {
-	CGFloat axesWidth = [self axesWidth];
+	CGFloat const axesWidth = [[self axesAttributes] width];
 	
 	[self addVerticalLineInContent:context
 				   withXCoordinate:0.0
@@ -392,8 +387,7 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 						   withWidth:axesWidth
 					   withTransform:transform];
 	
-	[[self axesColour] setStroke];
-	CGContextSetLineWidth(context, axesWidth);
+	[[self axesAttributes] set];
 	CGContextStrokePath(context);
 }
 
