@@ -61,17 +61,17 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-	if (self = [super initWithFrame:frame]) {
-		initialiseScatterGraph(self);
-	}
+	self = [super initWithFrame:frame];
+	if (self == nil) return nil;
+	initialiseScatterGraph(self);
 	return self;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)decoder
 {
-	if (self = [super initWithCoder:decoder]) {
-		initialiseScatterGraph(self);
-	}
+	self = [super initWithCoder:decoder];
+	if (self == nil) return nil;
+	initialiseScatterGraph(self);
 	return self;
 }
 
