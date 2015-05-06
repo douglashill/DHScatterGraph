@@ -97,7 +97,7 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 	for (NSString *propertyName in [self observedProperties]) {
 		[self addObserver:self
 			   forKeyPath:propertyName
-				  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew 
+				  options:(NSKeyValueObservingOptions)(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew)
 				  context:displayPropertiesObservationContext];
 	}
 }
