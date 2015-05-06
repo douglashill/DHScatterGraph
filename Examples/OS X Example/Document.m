@@ -3,8 +3,7 @@
 
 #import "Document.h"
 
-#import "DHScatterGraphView.h"
-#import "DHScatterGraphPointSet.h"
+@import DHScatterGraph;
 
 @interface Document ()
 

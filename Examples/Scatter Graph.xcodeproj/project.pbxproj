@@ -7,25 +7,78 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A51D30BB1AF6F200000624AD /* DHScatterGraphPointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A51D30BA1AF6F200000624AD /* DHScatterGraphPointSet.m */; };
-		A51D30BD1AF6F960000624AD /* DHScatterGraphPointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A51D30BA1AF6F200000624AD /* DHScatterGraphPointSet.m */; };
 		A583891B1698906D0081C26D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A583891A1698906D0081C26D /* main.m */; };
 		A583891F1698906D0081C26D /* ScatterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A583891E1698906D0081C26D /* ScatterAppDelegate.m */; };
 		A583892D169890CD0081C26D /* ScatterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A583892C169890CD0081C26D /* ScatterViewController.m */; };
-		A58389301698914C0081C26D /* DHScatterGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A583892F1698914C0081C26D /* DHScatterGraphView.m */; };
 		A598F54019BB8EA900D114ED /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = A598F53E19BB8EA900D114ED /* Document.xib */; };
 		A598F54119BB8EA900D114ED /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A598F53F19BB8EA900D114ED /* MainMenu.xib */; };
 		A5A06BC519BA35D800BFF447 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A06BC419BA35D800BFF447 /* main.m */; };
 		A5A06BCC19BA35D900BFF447 /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A06BCB19BA35D900BFF447 /* Document.m */; };
 		A5A06BD419BA35D900BFF447 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5A06BD319BA35D900BFF447 /* Images.xcassets */; };
-		A5A06BED19BA370400BFF447 /* DHScatterGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A583892F1698914C0081C26D /* DHScatterGraphView.m */; };
 		A5A06BEF19BB0D1E00BFF447 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5A06BEE19BB0D1E00BFF447 /* Images.xcassets */; };
+		A5CBE5521AFA8EFF008B667A /* DHScatterGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5CBE5511AFA8EBD008B667A /* DHScatterGraph.framework */; };
+		A5CBE5531AFA8EFF008B667A /* DHScatterGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5CBE5511AFA8EBD008B667A /* DHScatterGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5CBE55C1AFA8FD3008B667A /* DHScatterGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5CBE54F1AFA8EBD008B667A /* DHScatterGraph.framework */; };
+		A5CBE55D1AFA8FD3008B667A /* DHScatterGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5CBE54F1AFA8EBD008B667A /* DHScatterGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A5CBE54E1AFA8EBD008B667A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5CBE5491AFA8EBD008B667A /* DHScatterGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A50B1E2D1AF8D453004893C4;
+			remoteInfo = "DHScatterGraph OS X";
+		};
+		A5CBE5501AFA8EBD008B667A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5CBE5491AFA8EBD008B667A /* DHScatterGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A50B1E4B1AF8D46B004893C4;
+			remoteInfo = "DHScatterGraph iOS";
+		};
+		A5CBE5541AFA8EFF008B667A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5CBE5491AFA8EBD008B667A /* DHScatterGraph.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A50B1E4A1AF8D46B004893C4;
+			remoteInfo = "DHScatterGraph iOS";
+		};
+		A5CBE55E1AFA8FD3008B667A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5CBE5491AFA8EBD008B667A /* DHScatterGraph.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A50B1E2C1AF8D453004893C4;
+			remoteInfo = "DHScatterGraph OS X";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A5CBE5561AFA8EFF008B667A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A5CBE5531AFA8EFF008B667A /* DHScatterGraph.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5CBE5601AFA8FD4008B667A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A5CBE55D1AFA8FD3008B667A /* DHScatterGraph.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		A51D30B91AF6F200000624AD /* DHScatterGraphPointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHScatterGraphPointSet.h; sourceTree = "<group>"; };
-		A51D30BA1AF6F200000624AD /* DHScatterGraphPointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHScatterGraphPointSet.m; sourceTree = "<group>"; };
-		A51D30BC1AF6F955000624AD /* DHScatterGraphBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHScatterGraphBase.h; sourceTree = "<group>"; };
 		A583890A1698906D0081C26D /* Scatter Graph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Scatter Graph.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58389161698906D0081C26D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A583891A1698906D0081C26D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -33,8 +86,6 @@
 		A583891E1698906D0081C26D /* ScatterAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScatterAppDelegate.m; sourceTree = "<group>"; };
 		A583892B169890CD0081C26D /* ScatterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScatterViewController.h; sourceTree = "<group>"; };
 		A583892C169890CD0081C26D /* ScatterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScatterViewController.m; sourceTree = "<group>"; };
-		A583892E1698914C0081C26D /* DHScatterGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHScatterGraphView.h; sourceTree = "<group>"; };
-		A583892F1698914C0081C26D /* DHScatterGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHScatterGraphView.m; sourceTree = "<group>"; };
 		A598F53E19BB8EA900D114ED /* Document.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Document.xib; sourceTree = "<group>"; };
 		A598F53F19BB8EA900D114ED /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		A5A06BB719BA35D800BFF447 /* Scatter Graph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Scatter Graph.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +95,7 @@
 		A5A06BCB19BA35D900BFF447 /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
 		A5A06BD319BA35D900BFF447 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A5A06BEE19BB0D1E00BFF447 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A5CBE5491AFA8EBD008B667A /* DHScatterGraph.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = DHScatterGraph.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5CBE5521AFA8EFF008B667A /* DHScatterGraph.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5CBE55C1AFA8FD3008B667A /* DHScatterGraph.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,14 +154,10 @@
 		A598F53D19BB8E3200D114ED /* DHScatterGraph */ = {
 			isa = PBXGroup;
 			children = (
-				A51D30BC1AF6F955000624AD /* DHScatterGraphBase.h */,
-				A583892E1698914C0081C26D /* DHScatterGraphView.h */,
-				A583892F1698914C0081C26D /* DHScatterGraphView.m */,
-				A51D30B91AF6F200000624AD /* DHScatterGraphPointSet.h */,
-				A51D30BA1AF6F200000624AD /* DHScatterGraphPointSet.m */,
+				A5CBE5491AFA8EBD008B667A /* DHScatterGraph.xcodeproj */,
 			);
 			name = DHScatterGraph;
-			path = ../DHScatterGraph;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A5A06BBE19BA35D800BFF447 /* OS X Example */ = {
@@ -124,6 +174,15 @@
 			path = "OS X Example";
 			sourceTree = "<group>";
 		};
+		A5CBE54A1AFA8EBD008B667A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A5CBE54F1AFA8EBD008B667A /* DHScatterGraph.framework */,
+				A5CBE5511AFA8EBD008B667A /* DHScatterGraph.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -134,10 +193,12 @@
 				A58389061698906D0081C26D /* Sources */,
 				A58389071698906D0081C26D /* Frameworks */,
 				A58389081698906D0081C26D /* Resources */,
+				A5CBE5561AFA8EFF008B667A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A5CBE5551AFA8EFF008B667A /* PBXTargetDependency */,
 			);
 			name = "iOS Example";
 			productName = Scatter;
@@ -151,10 +212,12 @@
 				A5A06BB319BA35D800BFF447 /* Sources */,
 				A5A06BB419BA35D800BFF447 /* Frameworks */,
 				A5A06BB519BA35D800BFF447 /* Resources */,
+				A5CBE5601AFA8FD4008B667A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A5CBE55F1AFA8FD3008B667A /* PBXTargetDependency */,
 			);
 			name = "OS X Example";
 			productName = "Scatter Graph";
@@ -182,6 +245,12 @@
 			mainGroup = A58388FF1698906D0081C26D;
 			productRefGroup = A583890B1698906D0081C26D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A5CBE54A1AFA8EBD008B667A /* Products */;
+					ProjectRef = A5CBE5491AFA8EBD008B667A /* DHScatterGraph.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A58389091698906D0081C26D /* iOS Example */,
@@ -189,6 +258,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A5CBE54F1AFA8EBD008B667A /* DHScatterGraph.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DHScatterGraph.framework;
+			remoteRef = A5CBE54E1AFA8EBD008B667A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A5CBE5511AFA8EBD008B667A /* DHScatterGraph.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DHScatterGraph.framework;
+			remoteRef = A5CBE5501AFA8EBD008B667A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A58389081698906D0081C26D /* Resources */ = {
@@ -216,11 +302,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A51D30BB1AF6F200000624AD /* DHScatterGraphPointSet.m in Sources */,
 				A583891B1698906D0081C26D /* main.m in Sources */,
 				A583891F1698906D0081C26D /* ScatterAppDelegate.m in Sources */,
 				A583892D169890CD0081C26D /* ScatterViewController.m in Sources */,
-				A58389301698914C0081C26D /* DHScatterGraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,14 +312,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5A06BED19BA370400BFF447 /* DHScatterGraphView.m in Sources */,
-				A51D30BD1AF6F960000624AD /* DHScatterGraphPointSet.m in Sources */,
 				A5A06BCC19BA35D900BFF447 /* Document.m in Sources */,
 				A5A06BC519BA35D800BFF447 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A5CBE5551AFA8EFF008B667A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DHScatterGraph iOS";
+			targetProxy = A5CBE5541AFA8EFF008B667A /* PBXContainerItemProxy */;
+		};
+		A5CBE55F1AFA8FD3008B667A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DHScatterGraph OS X";
+			targetProxy = A5CBE55E1AFA8FD3008B667A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A58389261698906D0081C26D /* Debug */ = {
@@ -295,6 +390,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "iOS Example/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Scatter Graph";
 				WRAPPER_EXTENSION = app;
 			};
@@ -307,6 +403,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "iOS Example/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Scatter Graph";
 				WRAPPER_EXTENSION = app;
 			};
@@ -339,6 +436,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "OS X Example/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "Scatter Graph";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -370,6 +468,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "OS X Example/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "Scatter Graph";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;

@@ -3,8 +3,7 @@
 
 #import "ScatterViewController.h"
 
-#import "DHScatterGraphView.h"
-#import "DHScatterGraphPointSet.h"
+@import DHScatterGraph;
 
 @implementation ScatterViewController
 

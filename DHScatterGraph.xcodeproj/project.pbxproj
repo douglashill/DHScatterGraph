@@ -1,0 +1,387 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A5CBE53C1AFA8CF0008B667A /* DHScatterGraphBase.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CBE5371AFA8CF0008B667A /* DHScatterGraphBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5CBE53D1AFA8CF0008B667A /* DHScatterGraphBase.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CBE5371AFA8CF0008B667A /* DHScatterGraphBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5CBE53E1AFA8CF0008B667A /* DHScatterGraphPointSet.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CBE5381AFA8CF0008B667A /* DHScatterGraphPointSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5CBE53F1AFA8CF0008B667A /* DHScatterGraphPointSet.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CBE5381AFA8CF0008B667A /* DHScatterGraphPointSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5CBE5401AFA8CF0008B667A /* DHScatterGraphPointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CBE5391AFA8CF0008B667A /* DHScatterGraphPointSet.m */; };
+		A5CBE5411AFA8CF0008B667A /* DHScatterGraphPointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CBE5391AFA8CF0008B667A /* DHScatterGraphPointSet.m */; };
+		A5CBE5421AFA8CF0008B667A /* DHScatterGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CBE53A1AFA8CF0008B667A /* DHScatterGraphView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5CBE5431AFA8CF0008B667A /* DHScatterGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CBE53A1AFA8CF0008B667A /* DHScatterGraphView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5CBE5441AFA8CF0008B667A /* DHScatterGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CBE53B1AFA8CF0008B667A /* DHScatterGraphView.m */; };
+		A5CBE5451AFA8CF0008B667A /* DHScatterGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CBE53B1AFA8CF0008B667A /* DHScatterGraphView.m */; };
+		A5CBE5471AFA8D14008B667A /* DHScatterGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CBE5461AFA8D14008B667A /* DHScatterGraph.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5CBE5481AFA8D14008B667A /* DHScatterGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CBE5461AFA8D14008B667A /* DHScatterGraph.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A50B1E2D1AF8D453004893C4 /* DHScatterGraph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DHScatterGraph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50B1E4B1AF8D46B004893C4 /* DHScatterGraph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DHScatterGraph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A51D31BC1AF83975000624AD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5CBE5371AFA8CF0008B667A /* DHScatterGraphBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHScatterGraphBase.h; sourceTree = "<group>"; };
+		A5CBE5381AFA8CF0008B667A /* DHScatterGraphPointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHScatterGraphPointSet.h; sourceTree = "<group>"; };
+		A5CBE5391AFA8CF0008B667A /* DHScatterGraphPointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHScatterGraphPointSet.m; sourceTree = "<group>"; };
+		A5CBE53A1AFA8CF0008B667A /* DHScatterGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHScatterGraphView.h; sourceTree = "<group>"; };
+		A5CBE53B1AFA8CF0008B667A /* DHScatterGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHScatterGraphView.m; sourceTree = "<group>"; };
+		A5CBE5461AFA8D14008B667A /* DHScatterGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHScatterGraph.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A50B1E291AF8D453004893C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50B1E471AF8D46B004893C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A51D316F1AF83637000624AD = {
+			isa = PBXGroup;
+			children = (
+				A51D31BD1AF83975000624AD /* Source */,
+				A51D31BB1AF83975000624AD /* Resources */,
+				A51D317A1AF83637000624AD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A51D317A1AF83637000624AD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A50B1E2D1AF8D453004893C4 /* DHScatterGraph.framework */,
+				A50B1E4B1AF8D46B004893C4 /* DHScatterGraph.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A51D31BB1AF83975000624AD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A51D31BC1AF83975000624AD /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A51D31BD1AF83975000624AD /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				A5CBE5461AFA8D14008B667A /* DHScatterGraph.h */,
+				A5CBE5371AFA8CF0008B667A /* DHScatterGraphBase.h */,
+				A5CBE5381AFA8CF0008B667A /* DHScatterGraphPointSet.h */,
+				A5CBE5391AFA8CF0008B667A /* DHScatterGraphPointSet.m */,
+				A5CBE53A1AFA8CF0008B667A /* DHScatterGraphView.h */,
+				A5CBE53B1AFA8CF0008B667A /* DHScatterGraphView.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A50B1E2A1AF8D453004893C4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5CBE53E1AFA8CF0008B667A /* DHScatterGraphPointSet.h in Headers */,
+				A5CBE53C1AFA8CF0008B667A /* DHScatterGraphBase.h in Headers */,
+				A5CBE5471AFA8D14008B667A /* DHScatterGraph.h in Headers */,
+				A5CBE5421AFA8CF0008B667A /* DHScatterGraphView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50B1E481AF8D46B004893C4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5CBE53F1AFA8CF0008B667A /* DHScatterGraphPointSet.h in Headers */,
+				A5CBE53D1AFA8CF0008B667A /* DHScatterGraphBase.h in Headers */,
+				A5CBE5481AFA8D14008B667A /* DHScatterGraph.h in Headers */,
+				A5CBE5431AFA8CF0008B667A /* DHScatterGraphView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A50B1E2C1AF8D453004893C4 /* DHScatterGraph OS X */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A50B1E401AF8D453004893C4 /* Build configuration list for PBXNativeTarget "DHScatterGraph OS X" */;
+			buildPhases = (
+				A50B1E281AF8D453004893C4 /* Sources */,
+				A50B1E291AF8D453004893C4 /* Frameworks */,
+				A50B1E2A1AF8D453004893C4 /* Headers */,
+				A50B1E2B1AF8D453004893C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DHScatterGraph OS X";
+			productName = "DHScatterGraph OS X";
+			productReference = A50B1E2D1AF8D453004893C4 /* DHScatterGraph.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A50B1E4A1AF8D46B004893C4 /* DHScatterGraph iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A50B1E5E1AF8D46B004893C4 /* Build configuration list for PBXNativeTarget "DHScatterGraph iOS" */;
+			buildPhases = (
+				A50B1E461AF8D46B004893C4 /* Sources */,
+				A50B1E471AF8D46B004893C4 /* Frameworks */,
+				A50B1E481AF8D46B004893C4 /* Headers */,
+				A50B1E491AF8D46B004893C4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DHScatterGraph iOS";
+			productName = "DHScatterGraph iOS";
+			productReference = A50B1E4B1AF8D46B004893C4 /* DHScatterGraph.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A51D31701AF83637000624AD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Douglas Hill";
+				TargetAttributes = {
+					A50B1E2C1AF8D453004893C4 = {
+						CreatedOnToolsVersion = 6.3;
+					};
+					A50B1E4A1AF8D46B004893C4 = {
+						CreatedOnToolsVersion = 6.3;
+					};
+				};
+			};
+			buildConfigurationList = A51D31731AF83637000624AD /* Build configuration list for PBXProject "DHScatterGraph" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A51D316F1AF83637000624AD;
+			productRefGroup = A51D317A1AF83637000624AD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A50B1E2C1AF8D453004893C4 /* DHScatterGraph OS X */,
+				A50B1E4A1AF8D46B004893C4 /* DHScatterGraph iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A50B1E2B1AF8D453004893C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50B1E491AF8D46B004893C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A50B1E281AF8D453004893C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5CBE5441AFA8CF0008B667A /* DHScatterGraphView.m in Sources */,
+				A5CBE5401AFA8CF0008B667A /* DHScatterGraphPointSet.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50B1E461AF8D46B004893C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5CBE5451AFA8CF0008B667A /* DHScatterGraphView.m in Sources */,
+				A5CBE5411AFA8CF0008B667A /* DHScatterGraphPointSet.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A50B1E411AF8D453004893C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = DHScatterGraph;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A50B1E421AF8D453004893C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = DHScatterGraph;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A50B1E5F1AF8D46B004893C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = DHScatterGraph;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A50B1E601AF8D46B004893C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = DHScatterGraph;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A51D318D1AF83637000624AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A51D318E1AF83637000624AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A50B1E401AF8D453004893C4 /* Build configuration list for PBXNativeTarget "DHScatterGraph OS X" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A50B1E411AF8D453004893C4 /* Debug */,
+				A50B1E421AF8D453004893C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A50B1E5E1AF8D46B004893C4 /* Build configuration list for PBXNativeTarget "DHScatterGraph iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A50B1E5F1AF8D46B004893C4 /* Debug */,
+				A50B1E601AF8D46B004893C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A51D31731AF83637000624AD /* Build configuration list for PBXProject "DHScatterGraph" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A51D318D1AF83637000624AD /* Debug */,
+				A51D318E1AF83637000624AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A51D31701AF83637000624AD /* Project object */;
+}
