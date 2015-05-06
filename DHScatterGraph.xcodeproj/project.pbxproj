@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5785FB31AFAA4740074EB68 /* DHScatterGraphBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A5785FB21AFAA4740074EB68 /* DHScatterGraphBase.m */; };
+		A5785FB41AFAA4740074EB68 /* DHScatterGraphBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A5785FB21AFAA4740074EB68 /* DHScatterGraphBase.m */; };
 		A5CBE53C1AFA8CF0008B667A /* DHScatterGraphBase.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CBE5371AFA8CF0008B667A /* DHScatterGraphBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5CBE53D1AFA8CF0008B667A /* DHScatterGraphBase.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CBE5371AFA8CF0008B667A /* DHScatterGraphBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5CBE53E1AFA8CF0008B667A /* DHScatterGraphPointSet.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CBE5381AFA8CF0008B667A /* DHScatterGraphPointSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -25,6 +27,7 @@
 		A50B1E2D1AF8D453004893C4 /* DHScatterGraph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DHScatterGraph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50B1E4B1AF8D46B004893C4 /* DHScatterGraph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DHScatterGraph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A51D31BC1AF83975000624AD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5785FB21AFAA4740074EB68 /* DHScatterGraphBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHScatterGraphBase.m; sourceTree = "<group>"; };
 		A5CBE5371AFA8CF0008B667A /* DHScatterGraphBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHScatterGraphBase.h; sourceTree = "<group>"; };
 		A5CBE5381AFA8CF0008B667A /* DHScatterGraphPointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHScatterGraphPointSet.h; sourceTree = "<group>"; };
 		A5CBE5391AFA8CF0008B667A /* DHScatterGraphPointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHScatterGraphPointSet.m; sourceTree = "<group>"; };
@@ -82,6 +85,7 @@
 			children = (
 				A5CBE5461AFA8D14008B667A /* DHScatterGraph.h */,
 				A5CBE5371AFA8CF0008B667A /* DHScatterGraphBase.h */,
+				A5785FB21AFAA4740074EB68 /* DHScatterGraphBase.m */,
 				A5CBE5381AFA8CF0008B667A /* DHScatterGraphPointSet.h */,
 				A5CBE5391AFA8CF0008B667A /* DHScatterGraphPointSet.m */,
 				A5CBE53A1AFA8CF0008B667A /* DHScatterGraphView.h */,
@@ -212,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5CBE5441AFA8CF0008B667A /* DHScatterGraphView.m in Sources */,
+				A5785FB31AFAA4740074EB68 /* DHScatterGraphBase.m in Sources */,
 				A5CBE5401AFA8CF0008B667A /* DHScatterGraphPointSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5CBE5451AFA8CF0008B667A /* DHScatterGraphView.m in Sources */,
+				A5785FB41AFAA4740074EB68 /* DHScatterGraphBase.m in Sources */,
 				A5CBE5411AFA8CF0008B667A /* DHScatterGraphPointSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

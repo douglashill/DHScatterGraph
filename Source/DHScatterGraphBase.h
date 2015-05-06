@@ -18,3 +18,5 @@
 #define DH_COLOUR_CLASS NSColor
 
 #endif
+
+CGContextRef DHScatterGraphGetCurrentGraphicsContext(void);

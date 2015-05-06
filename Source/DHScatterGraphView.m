@@ -10,8 +10,6 @@
 
 #define DH_GREYSCALE_COLOUR_METHOD(WHITE, ALPHA) colorWithWhite:WHITE alpha:ALPHA
 
-#define DH_CGCONTEXT_CREATE UIGraphicsGetCurrentContext()
-
 #define DH_SET_NEEDS_DISPLAY_METHOD setNeedsDisplay
 
 #define DH_POINT_VALUE_METHOD CGPointValue
@@ -22,8 +20,6 @@
 #else
 
 #define DH_GREYSCALE_COLOUR_METHOD(WHITE, ALPHA) colorWithDeviceWhite:WHITE alpha:ALPHA
-
-#define DH_CGCONTEXT_CREATE [[NSGraphicsContext currentContext] graphicsPort]
 
 #define DH_SET_NEEDS_DISPLAY_METHOD setNeedsDisplay:YES
 
@@ -153,7 +149,7 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 	
 	[self calculateExtrema];
 	
-	CGContextRef context = DH_CGCONTEXT_CREATE;
+	CGContextRef const context = DHScatterGraphGetCurrentGraphicsContext();
 	CGAffineTransform transform = DH_TRANSFORM_FOR_LOWER_LEFT_ORIGIN([self bounds].size.height);
 	
 	// Scale the coordinate system to fit the data
