@@ -4,6 +4,7 @@
 #import "ScatterViewController.h"
 
 #import "DHScatterGraph.h"
+#import "DHScatterGraphPointSet.h"
 
 @implementation ScatterViewController
 
@@ -30,7 +31,7 @@
 		[dataPoints addObject:[NSValue valueWithCGPoint:point]];
 	}
 	
-	[scatterGraph setDataPoints:dataPoints];
+	[scatterGraph setPointSets:@[[DHScatterGraphPointSet pointSetWithDataPoints:dataPoints colour:[UIColor darkGrayColor] lineWidth:2 showsPointMarkers:YES]]];
 	
 	[self setView:scatterGraph];
 }

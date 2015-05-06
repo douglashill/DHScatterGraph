@@ -2,6 +2,8 @@
 //  https://github.com/douglashill/DHScatterGraph
 
 #import "DHScatterGraph.h"
+
+#import "DHScatterGraphPointSet.h"
 #import <objc/runtime.h>
 
 #if TARGET_OS_IPHONE
@@ -121,96 +123,6 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 
 #pragma mark - Custom accessors
 
-- (NSArray *)dataPoints
-{
-	if ([[self multipleDataPoints] count]) {
-		return [self multipleDataPoints][0];
-	}
-	return nil;
-}
-
-- (void)setDataPoints:(NSArray *)dataPoints
-{
-	[self setMultipleDataPoints:@[dataPoints]];
-}
-
-- (void)setMultipleDataPoints:(NSArray *)multipleDataPoints
-{
-	for (id object in multipleDataPoints) {
-		if (![object isKindOfClass:[NSArray class]]) {
-			[[NSException exceptionWithName:NSInvalidArgumentException
-									 reason:@"Object in multipleDataPoints is not a NSArray"
-								   userInfo:@{@"InvalidObject" : object}] raise];
-			return;
-		}
-		
-		for (id innerObject in object) {
-			if (![innerObject isKindOfClass:[NSValue class]]) {
-				[[NSException exceptionWithName:NSInvalidArgumentException
-										 reason:@"Object in array in multipleDataPoints is not a NSValue"
-									   userInfo:@{@"InvalidObject" : innerObject}] raise];
-				return;
-			}
-		}
-	}
-	
-	_multipleDataPoints = multipleDataPoints;
-}
-
-- (CGFloat)lineWidth
-{
-	if ([[self lineWidths] count]) {
-		return [[self lineWidths][0] floatValue];
-	}
-	return 0;
-}
-
-- (void)setLineWidth:(CGFloat)lineWidth
-{
-	[self setLineWidths:@[@(lineWidth)]];
-}
-
-- (void)setLineWidths:(NSArray *)lineWidths
-{
-	for (id object in lineWidths) {
-		if (![object isKindOfClass:[NSNumber class]]) {
-			[[NSException exceptionWithName:NSInvalidArgumentException
-									 reason:@"Object in lineWidths is not a NSNumber"
-								   userInfo:@{@"InvalidObject" : object}] raise];
-			return;
-		}
-	}
-	
-	_lineWidths = lineWidths;
-}
-
-- (DH_COLOUR_CLASS *)lineColour
-{
-	if ([[self lineColours] count]) {
-		return [self lineColours][0];
-	}
-	return nil;
-}
-
-- (void)setLineColour:(DH_COLOUR_CLASS *)lineColour
-{
-	[self setLineColours:@[lineColour]];
-}
-
-- (void)setLineColours:(NSArray *)lineColours
-{
-	for (id object in lineColours) {
-		if (![object isKindOfClass:[DH_COLOUR_CLASS class]]) {
-			[[NSException exceptionWithName:NSInvalidArgumentException
-									 reason:@"Object in lineColours is not a DH_COLOUR_CLASS"
-								   userInfo:@{@"InvalidObject" : object}] raise];
-			return;
-		}
-	}
-	
-	_lineColours = lineColours;
-}
-
 - (NSArray *)observedProperties
 {
 	if (_observedProperties) return _observedProperties;
@@ -320,7 +232,9 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 	
 	// Plot
 	
-	[[self multipleDataPoints] enumerateObjectsUsingBlock:^(NSArray *dataPoints, NSUInteger idx, BOOL *stop) {
+	[[self pointSets] enumerateObjectsUsingBlock:^(DHScatterGraphPointSet *pointSet, NSUInteger idx, BOOL *stop) {
+		NSArray *const dataPoints = [pointSet dataPoints];
+	 
 		if ([dataPoints count] == 0) return;
 		
 		CGPoint firstPoint = [dataPoints[0] DH_POINT_VALUE_METHOD];
@@ -337,28 +251,14 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 									point.y );
 		}
 		
-		CGFloat lineWidth = 2;
-		if ([[self lineWidths] count]) {
-			NSUInteger lineWidthsIndex = MIN([[self lineWidths] count] - 1, idx);
-			lineWidth = [[self lineWidths][lineWidthsIndex] floatValue];
-		}
-		CGContextSetLineWidth(context, lineWidth);
+		CGContextSetLineWidth(context, [pointSet lineWidth]);
 		
-		DH_COLOUR_CLASS *lineColour;
-		if ([[self lineColours] count]) {
-			NSUInteger lineColourIndex = MIN([[self lineColours] count] - 1, idx);
-			lineColour = [self lineColours][lineColourIndex];
-		} else {
-			lineColour = [DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.4, 1.0)];
-		}
-		[lineColour setStroke];
+		[[pointSet colour] setStroke];
 		
 		CGContextStrokePath(context);
 		
-		if ([[self showsPointMarkersFlags] count] <= idx) return;
-		NSNumber *obj = [self showsPointMarkersFlags][idx];
-		if ([obj boolValue] == NO) return;
-		[lineColour setFill];
+		if ([pointSet showsPointMarkers] == NO) return;
+		[[pointSet colour] setFill];
 		for (NSValue *value in dataPoints) {
 			CGPoint point = [value DH_POINT_VALUE_METHOD];
 			point = CGPointApplyAffineTransform(point, transform);
@@ -446,8 +346,8 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 
 - (BOOL)hasDataPoints
 {
-	for (NSArray *dataPoints in [self multipleDataPoints]) {
-		if ([dataPoints  count]) {
+	for (DHScatterGraphPointSet *pointSet in [self pointSets]) {
+		if ([[pointSet dataPoints] count]) {
 			return YES;
 		}
 	}
@@ -461,8 +361,8 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 	minY = [self yMinimum];
 	maxY = [self yMaximum];
 	
-	for (NSArray *dataPoints in [self multipleDataPoints]) {
-		for (NSValue *value in dataPoints) {
+	for (DHScatterGraphPointSet *pointSet in [self pointSets]) {
+		for (NSValue *value in [pointSet dataPoints]) {
 			CGPoint point = [value DH_POINT_VALUE_METHOD];
 			minX = MIN(minX, point.x);
 			maxX = MAX(maxX, point.x);

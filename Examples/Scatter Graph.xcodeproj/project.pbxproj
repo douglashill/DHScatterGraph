@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A51D30BB1AF6F200000624AD /* DHScatterGraphPointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A51D30BA1AF6F200000624AD /* DHScatterGraphPointSet.m */; };
+		A51D30BD1AF6F960000624AD /* DHScatterGraphPointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A51D30BA1AF6F200000624AD /* DHScatterGraphPointSet.m */; };
 		A583891B1698906D0081C26D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A583891A1698906D0081C26D /* main.m */; };
 		A583891F1698906D0081C26D /* ScatterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A583891E1698906D0081C26D /* ScatterAppDelegate.m */; };
 		A583892D169890CD0081C26D /* ScatterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A583892C169890CD0081C26D /* ScatterViewController.m */; };
@@ -21,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A51D30B91AF6F200000624AD /* DHScatterGraphPointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHScatterGraphPointSet.h; sourceTree = "<group>"; };
+		A51D30BA1AF6F200000624AD /* DHScatterGraphPointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHScatterGraphPointSet.m; sourceTree = "<group>"; };
+		A51D30BC1AF6F955000624AD /* DHScatterGraphBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DHScatterGraphBase.h; sourceTree = "<group>"; };
 		A583890A1698906D0081C26D /* Scatter Graph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Scatter Graph.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58389161698906D0081C26D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A583891A1698906D0081C26D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -95,8 +100,11 @@
 		A598F53D19BB8E3200D114ED /* DHScatterGraph */ = {
 			isa = PBXGroup;
 			children = (
+				A51D30BC1AF6F955000624AD /* DHScatterGraphBase.h */,
 				A583892E1698914C0081C26D /* DHScatterGraph.h */,
 				A583892F1698914C0081C26D /* DHScatterGraph.m */,
+				A51D30B91AF6F200000624AD /* DHScatterGraphPointSet.h */,
+				A51D30BA1AF6F200000624AD /* DHScatterGraphPointSet.m */,
 			);
 			name = DHScatterGraph;
 			path = ../DHScatterGraph;
@@ -208,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A51D30BB1AF6F200000624AD /* DHScatterGraphPointSet.m in Sources */,
 				A583891B1698906D0081C26D /* main.m in Sources */,
 				A583891F1698906D0081C26D /* ScatterAppDelegate.m in Sources */,
 				A583892D169890CD0081C26D /* ScatterViewController.m in Sources */,
@@ -220,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5A06BED19BA370400BFF447 /* DHScatterGraph.m in Sources */,
+				A51D30BD1AF6F960000624AD /* DHScatterGraphPointSet.m in Sources */,
 				A5A06BCC19BA35D900BFF447 /* Document.m in Sources */,
 				A5A06BC519BA35D800BFF447 /* main.m in Sources */,
 			);

@@ -4,6 +4,7 @@
 #import "Document.h"
 
 #import "DHScatterGraph.h"
+#import "DHScatterGraphPointSet.h"
 
 @interface Document ()
 
@@ -48,7 +49,7 @@
 {
 	[super windowControllerDidLoadNib:windowController];
 	
-	[[self scatterGraph] setDataPoints:[self dataPoints]];
+	[[self scatterGraph] setPointSets:@[[DHScatterGraphPointSet pointSetWithDataPoints:[self dataPoints] colour:[NSColor darkGrayColor] lineWidth:2 showsPointMarkers:YES]]];
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
