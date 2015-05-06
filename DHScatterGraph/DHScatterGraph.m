@@ -251,6 +251,7 @@ static void initialiseScatterGraph(DHScatterGraph *self)
 									point.y );
 		}
 		
+		CGContextSetLineJoin(context, kCGLineJoinBevel);
 		CGContextSetLineWidth(context, [pointSet lineWidth]);
 		
 		[[pointSet colour] setStroke];
