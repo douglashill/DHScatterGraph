@@ -465,12 +465,12 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 
 - (NSString *)xAxisText:(CGFloat)num
 {
-	return [self xFormattingBlock] ? [self xFormattingBlock](num) : [NSString stringWithFormat:@"%.0f", num];
+	return [self xFormattingBlock] ? [self xFormattingBlock](num) : [NSString stringWithFormat:@"%g", num];
 }
 
 - (NSString *)yAxisText:(CGFloat)num
 {
-	return [self yFormattingBlock] ? [self yFormattingBlock](num) : [NSString stringWithFormat:@"%.0f", num];
+	return [self yFormattingBlock] ? [self yFormattingBlock](num) : [NSString stringWithFormat:@"%g", num];
 }
 
 // Approximate maximum widths and heights using labels at extrema
