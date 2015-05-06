@@ -65,7 +65,7 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 - (instancetype)initWithFrame:(CGRect)frame
 {
 	if (self = [super initWithFrame:frame]) {
-		[self initialise];
+		initialiseScatterGraph(self);
 	}
 	return self;
 }
@@ -73,12 +73,12 @@ static void *const displayPropertiesObservationContext = (void *)&displayPropert
 - (instancetype)initWithCoder:(NSCoder *)decoder
 {
 	if (self = [super initWithCoder:decoder]) {
-		[self initialise];
+		initialiseScatterGraph(self);
 	}
 	return self;
 }
 
-- (void)initialise
+static void initialiseScatterGraph(DHScatterGraph *self)
 {
 #if TARGET_OS_IPHONE
 	[self setContentMode:UIViewContentModeRedraw];
