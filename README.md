@@ -21,8 +21,8 @@ DHScatterGraphView *scatterGraph = [[DHScatterGraphView alloc] initWithFrame:CGR
 [someSuperview addSubview:scatterGraph];
 	
 [scatterGraph setPointSets:@[[DHScatterGraphPointSet pointSetWithDataPoints:@[
-	NSValue valueWithCGPoint:CGPointMake(0.1, 2.0)],
-	NSValue valueWithCGPoint:CGPointMake(0.9, 0.3)],
-	NSValue valueWithCGPoint:CGPointMake(2.4, 3.1)],
+	[NSValue valueWithCGPoint:CGPointMake(0.1, 2.0)],
+	[NSValue valueWithCGPoint:CGPointMake(0.9, 0.3)],
+	[NSValue valueWithCGPoint:CGPointMake(2.4, 3.1)],
 ]]]];
 ```
