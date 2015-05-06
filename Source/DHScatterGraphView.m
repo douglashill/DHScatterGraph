@@ -501,8 +501,8 @@ CGFloat automaticStep(CGFloat dataRange, CGFloat screenPoints, CGFloat guide)
 	CGFloat target = dataRange / numberOfDivisions;
 	CGFloat magnitude = powf(10, floorf(log10f(target)));
 	
-	const int count = 4;
-	int multipliers[count] = {1, 2, 5, 10};
+	static int const multipliers[] = {1, 2, 5, 10};
+	static int const count = sizeof multipliers / sizeof *multipliers;
 	CGFloat smallestDifference = CGFLOAT_MAX;
 	int indexOfClosestMultiplier = 0;
 	
