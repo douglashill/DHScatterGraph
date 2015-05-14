@@ -23,4 +23,4 @@
  @brief Returns the current graphics context of the current thread.
  @return The current graphics context of the current thread.
  */
-CGContextRef DHScatterGraphGetCurrentGraphicsContext(void);
+CGContextRef __nullable DHScatterGraphGetCurrentGraphicsContext(void);

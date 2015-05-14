@@ -12,7 +12,7 @@
  @param width  The width the lines are be drawn at, in points.
  @return A new instance of DHScatterGraphLineAttributes.
  */
-+ (instancetype)lineAttributesWithColour:(DH_COLOUR_CLASS *)colour width:(CGFloat)width;
++ (nonnull instancetype)lineAttributesWithColour:(nonnull DH_COLOUR_CLASS *)colour width:(CGFloat)width;
 
 /**
  @brief Initialises an instance of DHScatterGraphLineAttributes with a given colour and line width.
@@ -21,10 +21,10 @@
  @param width  The width the lines are be drawn at, in points.
  @return An initialised instance of DHScatterGraphLineAttributes.
  */
-- (instancetype)initWithColour:(DH_COLOUR_CLASS *)colour width:(CGFloat)width __attribute((objc_designated_initializer));
+- (nonnull instancetype)initWithColour:(nonnull DH_COLOUR_CLASS *)colour width:(CGFloat)width __attribute((objc_designated_initializer));
 
 /// The colour used to draw lines.
-@property (nonatomic, strong, readonly) DH_COLOUR_CLASS *colour;
+@property (nonatomic, strong, nonnull, readonly) DH_COLOUR_CLASS *colour;
 
 /// The width the lines are be drawn at, in points.
 @property (nonatomic, readonly) CGFloat width;

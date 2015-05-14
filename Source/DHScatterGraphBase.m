@@ -3,7 +3,7 @@
 
 #import "DHScatterGraphBase.h"
 
-CGContextRef DHScatterGraphGetCurrentGraphicsContext(void)
+CGContextRef __nullable DHScatterGraphGetCurrentGraphicsContext(void)
 {
 #if TARGET_OS_IPHONE
 	return UIGraphicsGetCurrentContext();

@@ -5,12 +5,12 @@
 
 @implementation DHScatterGraphLineAttributes
 
-+ (instancetype)lineAttributesWithColour:(DH_COLOUR_CLASS *)colour width:(CGFloat)width
++ (nonnull instancetype)lineAttributesWithColour:(nonnull DH_COLOUR_CLASS *)colour width:(CGFloat)width
 {
 	return [[self alloc] initWithColour:colour width:width];
 }
 
-- (instancetype)init
+- (nonnull instancetype)init
 {
 	return [self initWithColour:nil width:0];
 }
