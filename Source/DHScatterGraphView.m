@@ -86,13 +86,11 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 	[self setPositiveQuadrantColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.94, 1.0)]];
 	[self setNegativeQuadrantColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.91, 1.0)]];
 	
-	[self setValueLabelStepSize:CGSizeMake(-1, -1)];
 	[self setShowValueLabelsAtOrigin:NO];
 	
 	[self setAxesAttributes:[DHScatterGraphLineAttributes lineAttributesWithColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.4, 1.0)] width:1]];
 	
 	[self setGridAttributes:[DHScatterGraphLineAttributes lineAttributesWithColour:[DH_COLOUR_CLASS DH_GREYSCALE_COLOUR_METHOD(0.8, 1.0)] width:1]];
-	[self setGridStepSize:CGSizeMake(-1, -1)];
 	
 	for (NSString *propertyName in [self observedProperties]) {
 		[self addObserver:self
@@ -187,18 +185,11 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 	
 	
 	// Grid lines
-	CGSize gridStep; // The actual step size used, resolved automatically if necessary
 	{
+		CGSize const gridStep = [self gridStepSize];
+		
 		CGFloat const lineWidth = [[self gridAttributes] width];
 		CGFloat edgeFudge = 0.1;
-		
-		gridStep = [self gridStepSize];
-		if (gridStep.width < 0) {
-			gridStep.width = automaticStep(maxX - minX, [self bounds].size.width, 20);
-		}
-		if (gridStep.height < 0) {
-			gridStep.height = automaticStep(maxY - minY, [self bounds].size.height, 20);
-		}
 		
 		// Vertical grid lines
 		for (CGFloat x = gridStep.width * ceilf(minX / gridStep.width + edgeFudge); x < maxX; x += gridStep.width) {
@@ -263,36 +254,7 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 	// Add values along axes
 		
 	CGFloat edgeFudge = 0.2;
-	CGSize labelStep = [self valueLabelStepSize];
-	if (labelStep.width <= 0) {
-		labelStep.width = automaticStep(maxX - minX, [self bounds].size.width, 50);
-		CGFloat maxLabelWidth = [self xAxisMaxLabelWidth] / xScale;
-		// Multiple of 1, 2, 5, 10 etc. of grid step
-		while (labelStep.width < maxLabelWidth) {
-			labelStep.width *= 2.0;
-			if (labelStep.width < maxLabelWidth) {
-				labelStep.width *= 2.5;
-				if (labelStep.width < maxLabelWidth) {
-					labelStep.width *= 2.0;
-				}
-			}
-		}
-	}
-	if (labelStep.height <= 0) {
-		labelStep.height = automaticStep(maxY - minY, [self bounds].size.height, 50);
-		CGFloat maxLabelHeight = [self yAxisMaxLabelHeight] / yScale;
-		// Multiple of 1, 2, 5, 10 etc. of grid step
-		while (labelStep.height < maxLabelHeight) {
-			labelStep.height *= 2.0;
-			if (labelStep.height < maxLabelHeight) {
-				labelStep.height *= 2.5;
-				if (labelStep.height < maxLabelHeight) {
-					labelStep.height *= 2.0;
-				}
-			}
-		}
-
-	}
+	CGSize const labelStep = [self valueLabelStepSize];
 	
 	CGSize const valueLabelOffset = [@"m" sizeWithAttributes:[self valueLabelAttributes]];
 	
@@ -492,10 +454,38 @@ static void initialiseScatterGraph(DHScatterGraphView *self)
 	return MAX(sizeOfMaxLabel.height, sizeOfMinLabel.height);
 }
 
+#pragma mark - Step sizes
+
+- (CGSize)gridStepSize
+{
+	return (CGSize){
+		.width = automaticStep(maxX - minX, [self bounds].size.width, [self targetGridStepSize].width),
+		.height = automaticStep(maxY - minY, [self bounds].size.height, [self targetGridStepSize].height),
+	};
+}
+
+- (CGSize)targetGridStepSize
+{
+	return CGSizeMake(20, 20);
+}
+
+- (CGSize)valueLabelStepSize
+{
+	return (CGSize){
+		.width = automaticValueLabelStep(maxX - minX, [self bounds].size.width, [self targetValueLabelStepSize].width, [self xAxisMaxLabelWidth] / xScale),
+		.height = automaticValueLabelStep(maxY - minY, [self bounds].size.height, [self targetValueLabelStepSize].height, [self yAxisMaxLabelHeight] / yScale),
+	};
+}
+
+- (CGSize)targetValueLabelStepSize
+{
+	return CGSizeMake(50, 50);
+}
+
 
 #pragma mark - Functions
 
-CGFloat automaticStep(CGFloat dataRange, CGFloat screenPoints, CGFloat guide)
+static CGFloat automaticStep(CGFloat dataRange, CGFloat screenPoints, CGFloat guide)
 {
 	CGFloat numberOfDivisions = screenPoints / guide;
 	CGFloat target = dataRange / numberOfDivisions;
@@ -517,6 +507,24 @@ CGFloat automaticStep(CGFloat dataRange, CGFloat screenPoints, CGFloat guide)
 	CGFloat step = multipliers[indexOfClosestMultiplier] * magnitude;
 	
 	return step;
+}
+
+static CGFloat automaticValueLabelStep(CGFloat dataRange, CGFloat screenPoints, CGFloat guide, CGFloat maxLabelStep)
+{
+	CGFloat labelStep = automaticStep(dataRange, screenPoints, guide);
+	
+	// Multiple of 1, 2, 5, 10 etc. of grid step
+	while (labelStep < maxLabelStep) {
+		labelStep *= 2.0;
+		if (labelStep < maxLabelStep) {
+			labelStep *= 2.5;
+			if (labelStep < maxLabelStep) {
+				labelStep *= 2.0;
+			}
+		}
+	}
+	
+	return labelStep;
 }
 
 @end

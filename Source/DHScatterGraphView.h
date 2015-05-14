@@ -21,7 +21,6 @@ typedef NSString *(^labelFormattingBlock)(CGFloat number);
 @property (nonatomic, retain) DH_COLOUR_CLASS *positiveQuadrantColour; // Background in upper-right and lower-left. Default: 94% white, fully opaque
 @property (nonatomic, retain) DH_COLOUR_CLASS *negativeQuadrantColour; // Background in upper-left and lower-right. Default: 91% white, fully opaque
 
-@property (nonatomic) CGSize valueLabelStepSize; // Step between value labels along the axes. Set to any negative value for automatic.
 @property (nonatomic, strong) NSDictionary *valueLabelAttributes; // Drawing attributes for value labels. See NSAttributedString AppKit/UIKit additions.
 @property (nonatomic, getter = shouldShowValueLabelsAtOrigin) BOOL showValueLabelsAtOrigin; // Show or hide the labels for (0, 0), which are drawn on top of the axes
 @property (nonatomic, copy) labelFormattingBlock xFormattingBlock; // Block that takes a CGFloat parameter and returns a string to be used as a label
@@ -32,6 +31,5 @@ typedef NSString *(^labelFormattingBlock)(CGFloat number);
 
 /// The attributes used to draw the grid lines. The default is a 0.8 grey and a width of 1 point.
 @property (nonatomic, strong) DHScatterGraphLineAttributes *gridAttributes;
-@property (nonatomic) CGSize gridStepSize; // Step between grid lines. Set to any negative value for automatic.
 
 @end
